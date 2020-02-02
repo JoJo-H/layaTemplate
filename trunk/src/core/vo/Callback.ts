@@ -2,7 +2,7 @@ module core {
     /**
      * 回调数据结构，提供this绑定功能
      */
-    export class Callback extends egret.HashObject {
+    export class Callback extends Object {
 
         readonly callback: Function;
 

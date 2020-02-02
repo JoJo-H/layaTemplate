@@ -85,5 +85,23 @@ module util {
             curDate.setDate(0);
             return curDate.getDate();
         }
+
+        /**
+         * 获取传入时间戳的本当前周 某天某时某分 的时间戳
+         * @param week 周几（周日是7）
+         * @param hour 小时
+         * @param minu 分钟
+         * @param second 秒
+         */
+        static getFormatTime(serverTime:number,week: number, hour: number, minu: number, second: number = 0): number {
+            let date = new Date();
+            date.setTime(serverTime);
+            date.setHours(0, 0, 0, 0);
+            let curSecond = date.getTime() / 1000;
+            let curWeek = date.getDay();
+            curWeek = curWeek == WeekNum.Sun ? 7 : curWeek;
+            let endDayTime = curWeek >= week ? (curSecond - (curWeek - week) * TimeConst.ONE_DAY_SEC) : (curSecond + (week - curWeek) * TimeConst.ONE_DAY_SEC);
+            return endDayTime + hour * TimeConst.ONE_HOURS_SEC + minu * 60 + second;
+        }
     }
 }

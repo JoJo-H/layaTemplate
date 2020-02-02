@@ -40,14 +40,14 @@ module common {
                 date.setHours(0, 0, 0, 0);
                 let time = date.getTime() - num + 2000;
                 App._tickId = setTimeout(App.updateCrossDayInfo, time);
-                logdebug(`-----延迟${time}毫秒之后更新跨天数据------`);
+                core.logdebug(`-----延迟${time}毫秒之后更新跨天数据------`);
             }
             App._serverTime = num;
             App._clientTime = new Date().getTime();
         }
         /** 更新跨天数据 */
         static updateCrossDayInfo(): void {
-            logdebug('-----开始请求更新跨天数据------');
+            core.logdebug('-----开始请求更新跨天数据------');
             clearTimeout(App._tickId);
             // PomeloClient.getInstance().request(Protocol.game_common_getCrossDayInfo, null, ($data) => {
             //     if (!$data) {

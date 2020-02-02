@@ -33,7 +33,7 @@ module core {
                     this._resDic[url] = null;
                     delete this._resDic[url];
                     Laya.loader.clearTextureRes(url);
-                    loghgy("销毁资源",url);
+                    logdebug("销毁资源",url);
                 }
             }
         }
@@ -51,7 +51,7 @@ module core {
                 if (info.num <= 0) {
                     logerror("ResUseManager.资源使用错误,次数<=0", url,info.num);
                 }
-                loghgy("使用资源",url,info.num);
+                logdebug("使用资源",url,info.num);
             }
         }
 
@@ -63,7 +63,7 @@ module core {
                 if (!info || info.num <= 0) continue;
                 --info.num;
                 info.lastTime = (new Date().getTime()) / 1000;
-                loghgy("释放资源",url,info.num);
+                logdebug("释放资源",url,info.num);
             }
         }
 
@@ -76,6 +76,37 @@ module core {
         /** 清除定时 */
         static clearTick(): void {
             Laya.timer.clear(this, this.checkRes);
+        }
+
+        /** 加载图集 */
+        static loadRes(atlas:string[],showWail:boolean=false):Promise<any> {
+            return new Promise((resolve,reject)=>{
+                let unloadList = atlas.filter((url)=>{
+                    return !Laya.loader.getRes(url);
+                });
+                if(unloadList.length == 0) {
+                    resolve();
+                    return ;
+                }
+                showWaiting();
+                Laya.loader.load(unloadList,Handler.create(null,(result)=>{
+					hideWaiting();
+					if(result === false){
+                        logdebug("资源加载失败：",unloadList);
+						return;
+					}
+                    resolve();
+                }),Handler.create(null,(value)=>{
+                    waitingProgress(value);
+                }));
+            });
+        }
+
+        /** 是否存在资源 */
+        static hasRes(...urlAry:string[]):boolean {
+            return urlAry.every((url)=>{
+                return Laya.loader.getRes(url);
+            });
         }
     }
 
