@@ -6,7 +6,10 @@ module core {
         public static loadingView : any;
         /** 等待界面类名称: 实现IWaitView的弹窗Dialog */
         public static waitView : any;
-
+        /** 警告提示界面类名称: 实现IAlertView的弹窗Dialog */
+        public static alertView : any;
+        /** 请求失败时的消息处理器类名 */
+        public static requestMsgHandler : IMsgHandler;
         // 美术设计画布像素高宽
         static SCENE_WIDTH: number = 720;
         static SCENE_HEIGHT: number = 1280;
@@ -22,6 +25,7 @@ module core {
 
             API.offsetX = (Laya.stage.width - API.SCENE_WIDTH) >> 1;
             API.offsetY = (Laya.stage.height - API.SCENE_HEIGHT) >> 1;
+
         }
     }
 

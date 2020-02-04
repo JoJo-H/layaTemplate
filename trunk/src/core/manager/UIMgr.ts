@@ -65,10 +65,11 @@ module core {
          * @param adaptStage 初始化时是否适配舞台尺寸
          */
         public registerUI(ui: any, uiname: string, atlases: Array<string>, destroyAtlases: Array<string>, depth: UI_DEPATH_VALUE, popEffect: boolean = false, isModal: boolean = false, closeOther: boolean = false, parentUI: string = null, isQueue: boolean = false, adaptStage: boolean = false): void {
-            if (!this._uiregistMap[uiname]) {
-                let info: UIInfo = { uiname, cls: ui, atlases, depth, popEffect, isModal, closeOther, parentUI, destroyAtlases, isQueue, adaptStage };
-                this._uiregistMap[uiname] = info;
+            if (this._uiregistMap[uiname]) {
+                logdebug("重复注册ui信息：",uiname);
             }
+            let info: UIInfo = { uiname, cls: ui, atlases, depth, popEffect, isModal, closeOther, parentUI, destroyAtlases, isQueue, adaptStage };
+            this._uiregistMap[uiname] = info;
         }
 
         /** 注册ui互斥组 */
@@ -267,28 +268,40 @@ module core {
             this._curQueueUI = null;
         }
     }
-
-    /**显示ui */
+    /** 注册ui */
+    export function registerUI(ui: any, uiname: string, atlases: Array<string>, destroyAtlases: Array<string>, depth: UI_DEPATH_VALUE, popEffect: boolean = false, isModal: boolean = false, closeOther: boolean = false, parentUI: string = null, isQueue: boolean = false, adaptStage: boolean = false): void {
+        UIMgr.getInstance().registerUI(ui, uiname,atlases,destroyAtlases,depth,popEffect,isModal,closeOther,parentUI,isQueue,adaptStage);
+    }
+    /** 显示ui */
     export function showUI(uiname: string, dataSource?: any, sound = true, preinit: boolean = false) {
         UIMgr.getInstance().showUI(uiname, dataSource);
     }
-    /**隐藏ui */
+    /** 隐藏ui */
     export function hideUIByName(uiname: string, showEffect?: boolean): void {
         UIMgr.getInstance().hideUIByName(uiname, showEffect);
     }
+    /** 隐藏ui */
     export function hideUIByDepth(depths: number[], excludes: string[] = []): void {
         UIMgr.getInstance().hideUIByDepth(depths, excludes);
     }
+    /** 获取ui */
     export function getUIByName(uiname: string): any {
         return UIMgr.getInstance().getUIByName(uiname);
     }
+    /** ui是否在舞台 */
     export function hasStage(uiname: string): boolean {
         return UIMgr.getInstance().hasStage(uiname);
     }
+    /** 某个group的ui是否在舞台 */
     export function hasStageByGroup(uiname: string): boolean {
         return UIMgr.getInstance().hasStageByGroup(uiname);
     }
+    /** 是否有队列弹窗 */
     export function hasQueueDialog(): boolean {
         return UIMgr.getInstance().hasQueueDialog();
+    }
+    /** 是否注册过ui */
+    export function hasRegisterUI(uiname:string): boolean {
+        return UIMgr.getInstance().getUIInfo(uiname) ? true : false;
     }
 }

@@ -2,25 +2,14 @@
 
 module core {
 
-    declare var loadingView : ILoadingView;
-	/**
-	 * 显示过场加载
-	 */
+	/** 显示过场加载 */
 	export function showLoading(text?: string): void {
-		logdebug("显示loading");
-		if (!loadingView) {
-            let clz = API.loadingView;
-            if(clz){
-                loadingView = new clz();
-            }else{
-                loadingView = new LoadingView();
-            }
-			loadingView.zOrder = UI_DEPATH_VALUE.LOADING;
+		logdebug("showLoading...");
+		if (!core.hasRegisterUI(ApiConst.LoadingView)) {
+            let clz = API.loadingView || LoadingView;
+			core.registerUI(clz,ApiConst.LoadingView,null,null,UI_DEPATH_VALUE.LOADING,false,true,false,null,false,true);
 		}
-		if (text) {
-			loadingView.dataSource = text;
-		}
-		loadingView.showLoading();
+		core.showUI(ApiConst.LoadingView,text);
 	}
 
 	/**
@@ -29,6 +18,7 @@ module core {
      * @param total 
      */ 
 	export function loadingProcess(value: number,total?:number,text?: string): void {
+		let loadingView = core.getUIByName(ApiConst.LoadingView) as ILoadingView;
 		if (loadingView) {
 			if (text) {
 				loadingView.dataSource = text;
@@ -37,33 +27,21 @@ module core {
 		}
 	}
 
-	/**
-	 * 隐藏过场加载
-	 */
+	/** 隐藏过场加载 */
 	export function hideLoading() {
-		logdebug("隐藏load");
-		if (loadingView) {
-			loadingView.hideLoading();
-		}
+		logdebug("hideLoading...");
+		core.hideUIByName(ApiConst.LoadingView);
+		
 	}
 
-	/**加载转圈 */
-	declare var waitView: IWaitView;
 	/** 显示加载转圈 */
 	export function showWaiting(text?: string): void {
-		if (!waitView) {
-            let clz = API.waitView;
-            if(clz){
-                waitView = new clz();
-            }else{
-                waitView = new WaitView();
-            }
-			waitView.zOrder = UI_DEPATH_VALUE.WAITING;
+		logdebug("showWaiting...");
+		if (!core.hasRegisterUI(ApiConst.WaitView)) {
+            let clz = API.waitView || WaitView;
+			core.registerUI(clz,ApiConst.WaitView,null,null,UI_DEPATH_VALUE.WAITING,false,true,false,null,false,true);
 		}
-		if (text) {
-			waitView.dataSource = text;
-		}
-		waitView.showWait();
+		core.showUI(ApiConst.WaitView,text);
 	}
 
 	/**
@@ -72,8 +50,9 @@ module core {
      * @param total 
      */ 
 	export function waitingProgress(value: number,total?:number,text?: string): void {
+		let waitView = core.getUIByName(ApiConst.WaitView) as IWaitView;
 		if (waitView) {
-            if (text) {
+			if (text) {
 				waitView.dataSource = text;
 			}
 			waitView.updateProgress(value,total);
@@ -82,8 +61,16 @@ module core {
 
 	/** 隐藏加载转圈 */
 	export function hideWaiting() {
-		if (waitView) {
-			waitView.hideWait();
+		logdebug("hideWaiting...");
+		core.hideUIByName(ApiConst.WaitView);
+	}
+
+	/** 显示加载转圈 */
+	export function showAlert(data: IAlertVo): void {
+		if (!core.hasRegisterUI(ApiConst.AlertView)) {
+            let clz = API.alertView || AlertView;
+			core.registerUI(clz,ApiConst.AlertView,null,null,UI_DEPATH_VALUE.ALERT,true,true,false,null,false,false);
 		}
+		core.showUI(ApiConst.AlertView,data);
 	}
 }
