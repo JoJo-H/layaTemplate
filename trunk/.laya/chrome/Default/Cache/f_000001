@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset='utf-8' />
+	<title>神灵契约</title>
+	<meta name='viewport' content='width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no'
+	/>
+	<meta name="renderer" content="webkit"/>
+	<meta name='apple-mobile-web-app-capable' content='yes' />
+	<meta name='full-screen' content='true' />
+	<meta name='x5-fullscreen' content='true' />
+	<meta name='360-fullscreen' content='true' />
+	<meta name="laya" screenorientation ="portrait"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta http-equiv='expires' content='0' />
+	<meta http-equiv="Cache-Control" content="no-siteapp"/>
+</head>
+
+<body>
+	<!--以下引用了常用类库，如果不使用，可以删除-->
+	
+    <!--核心包，封装了显示对象渲染，事件，时间管理，时间轴动画，缓动，消息交互,socket，本地存储，鼠标触摸，声音，加载，颜色滤镜，位图字体等-->
+	<script type="text/javascript" src="libs/laya.core.js"></script>
+	<!--提供了微信小游戏的适配-->
+	<script type="text/javascript" src="libs/laya.wxmini.js"></script>
+	<!--封装了webgl渲染管线，如果使用webgl渲染，可以在初始化时调用Laya.init(1000,800,laya.webgl.WebGL);-->
+    <script type="text/javascript" src="libs/laya.webgl.js"></script>
+	<!--是动画模块，包含了swf动画，骨骼动画等-->
+    <script type="text/javascript" src="libs/laya.ani.js"></script>
+	<!--包含更多webgl滤镜，比如外发光，阴影，模糊以及更多-->
+    <script type="text/javascript" src="libs/laya.filter.js"></script>
+	<!--封装了html动态排版功能-->
+    <script type="text/javascript" src="libs/laya.html.js"></script>
+	<!--粒子类库-->
+    <script type="text/javascript" src="libs/laya.particle.js"></script>
+	<!--提供tileMap解析支持-->
+    <script type="text/javascript" src="libs/laya.tiledmap.js"></script>
+	<!--提供了制作UI的各种组件实现-->
+    <script type="text/javascript" src="libs/laya.ui.js"></script>
+	<!-- 物理引擎matter.js -->
+	<!--用户自定义顺序文件添加到这里-->
+	<!--jsfile--Custom-->
+	  <script src="libs/inflate.min.js"></script>
+    <script src="js/pan3d/engine/events/Event.js"></script>
+    <script src="js/pan3d/engine/events/EventDispatcher.js"></script>
+    <script src="js/pan3d/engine/base/GC.js"></script>
+    <script src="js/pan3d/engine/base/ResCount.js"></script>
+    <script src="js/pan3d/engine/base/ResGC.js"></script>
+    <script src="js/pan3d/engine/base/Object3D.js"></script>
+    <script src="js/pan3d/engine/base/Camera3D.js"></script>
+    <script src="js/pan3d/engine/base/ObjData.js"></script>
+    <script src="js/pan3d/engine/base/MeshData.js"></script>
+    <script src="js/pan3d/engine/base/Dictionary.js"></script>
+    <script src="js/pan3d/engine/base/ColorType.js"></script>
+    <script src="js/pan3d/engine/base/BitMapData.js"></script>
+    <script src="js/pan3d/engine/context/Context3D.js"></script>
+    <script src="js/pan3d/engine/context/Scene_data.js"></script>
+    <script src="js/pan3d/engine/display3D/Display3D.js"></script>
+    <script src="js/pan3d/engine/display3D/Display3DSprite.js"></script>
+    <script src="js/pan3d/engine/display3D/Display3DSky.js"></script>
+    <script src="js/pan3d/engine/display3D/Display3dMovie.js"></script>
+    <script src="js/pan3d/engine/display3D/Display3dBatchMovie.js"></script>
+    <script src="js/pan3d/engine/display3D/Display3dShadow.js"></script>
+    <script src="js/pan3d/engine/display3D/Display3dBg.js"></script>
+    <script src="js/pan3d/engine/display3D/Display2dMovie.js"></script>
+    <script src="js/pan3d/engine/display3D/Display3DUISprite.js"></script>
+    <script src="js/pan3d/engine/display3D/Display2DSprite.js"></script>
+    <script src="js/pan3d/engine/display3D/Display2DSprite.js"></script>
+    <script src="js/pan3d/engine/display3D/terrain/TerrainDisplay3DSprite.js"></script>
+    <script src="js/pan3d/engine/Engine.js"></script>
+    <script src="js/pan3d/engine/math/MathClass.js"></script>
+    <script src="js/pan3d/engine/math/MathUtil.js"></script>
+    <script src="js/pan3d/engine/math/Matrix3D.js"></script>
+    <script src="js/pan3d/engine/math/Quaternion.js"></script>
+    <script src="js/pan3d/engine/math/Vector3D.js"></script>
+    <script src="js/pan3d/engine/math/Vector2D.js"></script>
+    <script src="js/pan3d/engine/math/Rectangle.js"></script>
+    <script src="js/pan3d/engine/math/Circle.js"></script>
+    <script src="js/pan3d/engine/math/Groundposition.js"></script>
+    <script src="js/pan3d/engine/math/Calculation.js"></script>
+    <script src="js/pan3d/engine/math/Pan3dByteArray.js"></script>
+    <script src="js/pan3d/engine/math/TestTriangle.js"></script>
+    <script src="js/pan3d/engine/program/ProgramManager.js"></script>
+    <script src="js/pan3d/engine/program/Shader3D.js"></script>
+    <script src="js/pan3d/engine/program/BuildShader.js"></script>
+    <script src="js/pan3d/engine/program/MaterialShader.js"></script>
+    <script src="js/pan3d/engine/program/MaterialAnimShader.js"></script>
+    <script src="js/pan3d/engine/program/MaterialBatchAnimShader.js"></script>
+    <script src="js/pan3d/engine/program/SkyShader.js"></script>
+    <script src="js/pan3d/engine/program/Display3DShadowShader.js"></script>
+    <script src="js/pan3d/engine/program/UIShader.js"></script>
+    <script src="js/pan3d/engine/program/UIImageShager.js"></script>
+    <script src="js/pan3d/engine/program/UIMaskShader.js"></script>
+    <script src="js/pan3d/engine/program/Movie2DShader.js"></script>
+    <script src="js/pan3d/engine/program/Sprite2DShader.js"></script>
+    <script src="js/pan3d/engine/program/TerrainDisplay3DShader.js"></script>
+    <script src="js/pan3d/engine/particle/CombineParticleData.js"></script>
+    <script src="js/pan3d/engine/particle/CombineParticle.js"></script>
+    <script src="js/pan3d/engine/particle/ParticleManager.js"></script>
+    <script src="js/pan3d/engine/particle/Display3DParticle.js"></script>
+    <script src="js/pan3d/engine/particle/ParticleData.js"></script>
+    <script src="js/pan3d/engine/particle/ParticleGpuData.js"></script>
+    <script src="js/pan3d/engine/particle/facet/Display3DFacetParticle.js"></script>
+    <script src="js/pan3d/engine/particle/facet/Display3DFacetShader.js"></script>
+    <script src="js/pan3d/engine/particle/facet/ParticleFacetData.js"></script>
+    <script src="js/pan3d/engine/particle/ball/Display3DBallPartilce.js"></script>
+    <script src="js/pan3d/engine/particle/ball/Display3DBallShader.js"></script>
+    <script src="js/pan3d/engine/particle/ball/ParticleBallData.js"></script>
+    <script src="js/pan3d/engine/particle/ball/ParticleBallGpuData.js"></script>
+    <script src="js/pan3d/engine/display3D/BaseDiplay3dSprite.js"></script>
+    <script src="js/pan3d/engine/particle/locus/Display3DLocusPartilce.js"></script>
+    <script src="js/pan3d/engine/particle/locus/Display3DLocusShader.js"></script>
+    <script src="js/pan3d/engine/particle/locus/ParticleLocusData.js"></script>
+    <script src="js/pan3d/engine/particle/locusball/Display3DLocusBallPartilce.js"></script>
+    <script src="js/pan3d/engine/particle/locusball/ParticleLocusballData.js"></script>
+    <script src="js/pan3d/engine/particle/model/Display3DModelPartilce.js"></script>
+    <script src="js/pan3d/engine/particle/model/Display3DModelObjParticle.js"></script>
+    <script src="js/pan3d/engine/particle/model/Display3dModelAnimParticle.js"></script>
+    <script src="js/pan3d/engine/particle/model/ParticleModelData.js"></script>
+    <script src="js/pan3d/engine/particle/follow/Display3DFollowPartilce.js"></script>
+    <script src="js/pan3d/engine/particle/follow/Display3DFollowShader.js"></script>
+    <script src="js/pan3d/engine/particle/follow/ParticleFollowData.js"></script>
+    <script src="js/pan3d/engine/particle/followlocus/Display3DFollowLocusPartilce.js"></script>
+    <script src="js/pan3d/engine/particle/followlocus/Display3DFollowLocusShader.js"></script>
+    <script src="js/pan3d/engine/particle/followlocus/ParticleFollowLocusData.js"></script>
+    <script src="js/pan3d/engine/particle/bone/Display3DBonePartilce.js"></script>
+    <script src="js/pan3d/engine/particle/bone/ParticleBoneData.js"></script>
+    <script src="js/pan3d/engine/particle/ctrl/KeyFrame.js"></script>
+    <script src="js/pan3d/engine/particle/ctrl/TimeLineData.js"></script>
+    <script src="js/pan3d/engine/particle/ctrl/TimeLine.js"></script>
+    <script src="js/pan3d/engine/particle/ctrl/BaseAnim.js"></script>
+    <script src="js/pan3d/engine/particle/ctrl/AxisMove.js"></script>
+    <script src="js/pan3d/engine/particle/ctrl/AxisRotaion.js"></script>
+    <script src="js/pan3d/engine/particle/ctrl/ScaleAnim.js"></script>
+    <script src="js/pan3d/engine/particle/ctrl/ScaleChange.js"></script>
+    <script src="js/pan3d/engine/particle/ctrl/ScaleNoise.js"></script>
+    <script src="js/pan3d/engine/particle/ctrl/SelfRotation.js"></script>
+    <script src="js/pan3d/engine/ui/base/InteractiveEvent.js"></script>
+    <script src="js/pan3d/engine/ui/base/TextAlign.js"></script>
+    <script src="js/pan3d/engine/ui/base/UIAtlas.js"></script>
+    <script src="js/pan3d/engine/ui/base/UIRectangle.js"></script>
+    <script src="js/pan3d/engine/ui/base/UIGridRectangle.js"></script>
+    <script src="js/pan3d/engine/ui/base/UICompenent.js"></script>
+    <script src="js/pan3d/engine/ui/base/UIContainer.js"></script>
+    <script src="js/pan3d/engine/ui/base/UIVirtualContainer.js"></script>
+    <script src="js/pan3d/engine/ui/base/UIData.js"></script>
+    <script src="js/pan3d/engine/ui/base/UIRenderComponent.js"></script>
+    <script src="js/pan3d/engine/ui/base/UIListRenderComponent.js"></script>
+    <script src="js/pan3d/engine/ui/base/UIBackImg.js"></script>
+    <script src="js/pan3d/engine/ui/base/UIMask.js"></script>
+    <script src="js/pan3d/engine/ui/compenent/BaseButton.js"></script>
+    <script src="js/pan3d/engine/ui/compenent/Button.js"></script>
+    <script src="js/pan3d/engine/ui/compenent/SelectButton.js"></script>
+    <script src="js/pan3d/engine/ui/compenent/Grid9Compenent.js"></script>
+    <script src="js/pan3d/engine/ui/compenent/FrameCompenent.js"></script>
+    <script src="js/pan3d/engine/ui/compenent/List.js"></script>
+    <script src="js/pan3d/engine/ui/compenent/SList.js"></script>
+    <script src="js/pan3d/engine/ui/compenent/GridList.js"></script>
+    <script src="js/pan3d/engine/ui/compenent/CdUICompenent.js"></script>
+    <script src="js/pan3d/engine/ui/compenent/Dis2DUIContianerPanel.js"></script>
+    <script src="js/pan3d/engine/ui/compenent/AlphaUiContianer.js"></script>
+    <script src="js/pan3d/engine/ui/compenent/RoationUiContianer.js"></script>
+    <script src="js/pan3d/engine/ui/base/FrameUIRender.js"></script>
+    <script src="js/pan3d/engine/ui/IconManager.js"></script>
+    <script src="js/pan3d/engine/ui/UIManager.js"></script>
+    <script src="js/pan3d/engine/ui/UILoading.js"></script>
+    <script src="js/pan3d/engine/ui/UIStage.js"></script>
+    <script src="js/pan3d/engine/ui/PuiData.js"></script>
+    <script src="js/pan3d/engine/material/TextureRes.js"></script>
+    <script src="js/pan3d/engine/material/TextureManager.js"></script>
+    <script src="js/pan3d/engine/material/ConstItem.js"></script>
+    <script src="js/pan3d/engine/material/TexItem.js"></script>
+    <script src="js/pan3d/engine/material/Material.js"></script>
+    <script src="js/pan3d/engine/material/MaterialManager.js"></script>
+    <script src="js/pan3d/engine/material/DynamicBaseConstItem.js"></script>
+    <script src="js/pan3d/engine/material/DynamicBaseTexItem.js"></script>
+    <script src="js/pan3d/engine/material/MaterialBaseParam.js"></script>
+    <script src="js/pan3d/engine/material/MaterialParam.js"></script>
+    <script src="js/pan3d/engine/material/DynamicConstItem.js"></script>
+    <script src="js/pan3d/engine/material/DynamicTexItem.js"></script>
+    <script src="js/pan3d/engine/scene/tree/QuadTreeNode.js"></script>
+    <script src="js/pan3d/engine/scene/tree/SceneQuadTree.js"></script>
+    <script src="js/pan3d/engine/scene/ViewFrustum.js"></script>
+    <script src="js/pan3d/engine/scene/SceneManager.js"></script>
+    <script src="js/pan3d/engine/skill/SkillManager.js"></script>
+    <script src="js/pan3d/engine/skill/Skill.js"></script>
+    <script src="js/pan3d/engine/skill/SkillData.js"></script>
+    <script src="js/pan3d/engine/skill/vo/SkillVo.js"></script>
+    <script src="js/pan3d/engine/skill/vo/SkillKeyVo.js"></script>
+    <script src="js/pan3d/engine/skill/key/SkillKey.js"></script>
+    <script src="js/pan3d/engine/skill/key/SkillEffect.js"></script>
+    <script src="js/pan3d/engine/skill/key/SkillFixEffect.js"></script>
+    <script src="js/pan3d/engine/skill/key/SkillTrajectory.js"></script>
+    <script src="js/pan3d/engine/skill/key/SkillMulTrajectory.js"></script>
+    <script src="js/pan3d/engine/skill/path/SkillPath.js"></script>
+    <script src="js/pan3d/engine/skill/path/SkillSinPath.js"></script>
+    <script src="js/pan3d/engine/skill/path/SkillMulPath.js"></script>
+    <script src="js/pan3d/engine/skill/path/PathManager.js"></script>
+    <script src="js/pan3d/engine/utils/LoadManager.js"></script>
+    <script src="js/pan3d/engine/utils/ObjDataManager.js"></script>
+    <script src="js/pan3d/engine/utils/MeshDataManager.js"></script>
+    <script src="js/pan3d/engine/utils/AnimManager.js"></script>
+    <script src="js/pan3d/engine/utils/LightProbeManager.js"></script>
+    <script src="js/pan3d/engine/utils/GroupDataManager.js"></script>
+    <script src="js/pan3d/engine/utils/AstarUtil.js"></script>
+    <script src="js/pan3d/engine/utils/KeyboardType.js"></script>
+    <script src="js/pan3d/engine/utils/KeyControl.js"></script>
+    <script src="js/pan3d/engine/utils/TimeUtil.js"></script>
+    <script src="js/pan3d/engine/utils/Util.js"></script>
+    <script src="js/pan3d/engine/utils/ColorTransition.js"></script>
+    <script src="js/pan3d/engine/utils/ArtFont.js"></script>
+    <script src="js/pan3d/engine/utils/LabelTextFont.js"></script>
+    <script src="js/pan3d/engine/utils/SoundManager.js"></script>
+    <script src="js/pan3d/engine/utils/BloodManager.js"></script>
+    <script src="js/pan3d/engine/utils/curves/Curve.js"></script>
+    <script src="js/pan3d/engine/utils/shadow/Shadow.js"></script>
+    <script src="js/pan3d/engine/utils/shadow/ShadowManager.js"></script>
+    <script src="js/pan3d/engine/utils/res/BaseRes.js"></script>
+    <script src="js/pan3d/engine/utils/res/ResManager.js"></script>
+    <script src="js/pan3d/engine/utils/res/RoleRes.js"></script>
+    <script src="js/pan3d/engine/utils/res/SkillRes.js"></script>
+    <script src="js/pan3d/engine/utils/res/RoleResLow.js"></script>
+    <script src="js/pan3d/engine/utils/res/ModelRes.js"></script>
+    <script src="js/pan3d/engine/utils/res/GroupRes.js"></script>
+    <script src="js/pan3d/engine/scene/SceneRes.js"></script>
+    <script src="js/pan3d/engine/scene/SceneResLow.js"></script>
+    <script src="js/pan3d/engine/net/obj/NetEventDispatcher.js"></script>
+    <script src="js/pan3d/engine/net/obj/UpdateMask.js"></script>
+    <script src="js/pan3d/engine/net/obj/StringIndexer.js"></script>
+    <script src="js/pan3d/engine/net/obj/SyncEvent.js"></script>
+    <script src="js/pan3d/engine/net/obj/BinLogStru.js"></script>
+    <script src="js/pan3d/engine/net/obj/SyncEventRecorder.js"></script>
+    <script src="js/pan3d/engine/net/obj/GuidObject.js"></script>
+    <script src="js/pan3d/engine/net/obj/GuidObjectTable.js"></script>
+    <script src="js/pan3d/engine/net/obj/SyncEventFilter.js"></script>
+    <script src="js/pan3d/engine/net/obj/SyncEventFilter.js"></script>
+    <script src="js/pan3d/engine/net/obj/ObjectDef.js"></script>
+    <script src="js/pan3d/engine/net/script/clientmsg.js"></script>
+    <script src="js/pan3d/engine/net/script/Protocols.js"></script>
+    <script src="js/pan3d/engine/net/script/clientstru.js"></script>
+
+    <script src="js/pan3d/engine/net/NetManager.js"></script>
+    <script src="js/pan3d/engine/vo/skinanim/AnimData.js"></script>
+    <script src="js/pan3d/engine/vo/skinanim/SkinMesh.js"></script>
+    <script src="js/pan3d/engine/vo/skinanim/BoneSocketData.js"></script>
+    <script src="js/pan3d/engine/vo/collistion/CollisionVo.js"></script>
+    <script src="js/pan3d/engine/vo/collistion/CapsuleVo.js"></script>
+    <script src="js/pan3d/engine/vo/LightVo.js"></script>
+    <script src="js/pan3d/engine/scene/grldLevel/LineDisplayShader.js"></script>
+    <script src="js/pan3d/engine/scene/grldLevel/LineDisplaySprite.js"></script>
+
+    <script src="js/pan3d/engine/FpsStage.js"></script>
+
+
+    <script src="js/pan3d/mvcframe/Module.js"></script>
+    <script src="js/pan3d/mvcframe/Processor.js"></script>
+    <script src="js/pan3d/mvcframe/ModuleEventManager.js"></script>
+
+    <script src="js/pan3d/UnitFunction.js"></script>
+    <script src="js/pan3d/baseprite/CharAction.js"></script>
+    <script src="js/pan3d/baseprite/Unit.js"></script>
+    <script src="js/pan3d/baseprite/SceneBaseChar.js"></script>
+    <script src="js/pan3d/baseprite/SceneChar.js"></script>
+    <script src="js/pan3d/baseprite/MountChar.js"></script>
+    <script src="js/pan3d/baseprite/BaseProcessor.js"></script>
+    <script src="js/pan3d/baseprite/GameStart.js"></script>
+
+    <script src="js/pan3dinit/scenedis/SkillSceneChar.js"></script>
+    <script src="js/pan3dinit/scenedis/ModelSceneChar.js"></script>
+    <script src="js/pan3dinit/scenedis/ModelshowMouseManager.js"></script>
+    <script src="js/pan3dinit/scenedis/SceneMouseEventModel.js"></script>
+    <script src="js/pan3dinit/scenedis/CharModelShow.js"></script>
+    <script src="js/pan3dinit/scenedis/CharSkillPlayModel.js"></script>
+    <script src="js/pan3dinit/scene3d/override/OverrideEngine.js"></script>
+    <script src="js/pan3dinit/scene3d/override/OverrideSceneManager.js"></script>
+    <script src="js/pan3dinit/scene3d/override/OverrideBloodManager.js"></script>
+    <script src="js/pan3dinit//scene3d/Scene3dInit.js"></script>
+    <script src="js/pan3dinit/scene2d/override2d/Override2dEngine.js"></script>
+    <script src="js/pan3dinit/scene2d/override2d/Override2dSceneManager.js"></script>
+    <script src="js/pan3dinit/scene2d/CanvasPostionModel.js"></script>
+    <script src="js/pan3dinit/scene2d/Scene2dChar.js"></script>
+    <script src="js/pan3dinit/scene2d/GroundModel.js"></script>
+    <script src="js/pan3dinit/scene2d/Scene2dInit.js"></script>
+    <script src="js/pan3dinit/scene2d/AppDataArpg.js"></script>
+    <script src="js/pan3dinit/mainpan3d.js"></script>
+
+
+
+ 
+    <script src="js/src/scenebase/layapan/overridebase/skill/OverrideSkillKeyVo.js"></script>
+    <script src="js/src/scenebase/layapan/overridebase/skill/OverrideSkill.js"></script>
+    <script src="js/src/scenebase/layapan/overridebase/skill/OverrideSkillFixEffect.js"></script>
+    <script src="js/src/scenebase/layapan/overridebase/LayaOverride2dEngine.js"></script>
+    <script src="js/src/scenebase/layapan/overridebase/LayaOverride2dSkillManager.js"></script>
+    <script src="js/src/scenebase/layapan/overridebase/LayaOverrideGroupDataManager.js"></script>
+    <script src="js/src/scenebase/layapan/overridebase/LayaOverride2dSceneManager.js"></script>
+    <script src="js/src/scenebase/layapan/overridebase/LayaScene2dInit.js"></script>
+    <script src="js/src/scenebase/layapan/overridebase/LayaScene2dInit.js"></script>
+    <script src="js/src/scenebase/layapan/LayaSceneBaseChar.js"></script>
+    <script src="js/src/scenebase/layapan/LayaSceneChar.js"></script>
+    <script src="js/src/scenebase/layapan/LayaInsideSprite.js"></script>
+
+    <script src="js/src/scenebase/BaseLaya3dSprite.js"></script>
+    <script src="js/src/scenebase/Scene3dLaya3dSprite.js"></script>
+    <script src="js/src/scenebase/Game2dChar.js"></script>
+    <script src="js/src/scenebase/Game3dChar.js"></script>
+
+
+
+    
+
+	<!--jsfile--Custom-->
+
+    <!--自定义的js(src文件夹下)文件自动添加到下面jsfile模块标签里面里-->
+    <!--删除标签，ide不会自动添加js文件，请谨慎操作-->
+
+    <!--启动类添加到这里-->
+    <!--jsfile--Main-->
+
+    <script src="js/src/extendscene/Base2dSceneLayer.js"></script>
+    <script src="js/src/extendscene/Base3dSceneLayer.js"></script>
+    <script src="js/src/extendscene/FightScene.js"></script>
+    <script src="js/src/extendscene/EffectScene.js"></script>
+    <script src="js/src/ui/layaUI.max.all.js"></script>
+    <!--jsfile--hud-->
+    <script src="js/src/view/common/ItemBox.js"></script>
+    <script src="js/src/view/common/UIConst.js"></script>   
+    <script src="js/src/view/common/Hero.js"></script>
+    <script src="js/src/view/HudView.js"></script>
+    <script src="js/src/view/UIManager.js"></script>
+    <script src="js/src/view/shengjie/ShengjieResultView.js"></script>
+    <script src="js/src/view/shengjie/ShengjieView.js"></script>
+    <script src="js/src/view/fight/FightView.js"></script>
+    <script src="js/src/view/fight/FightResultView.js"></script>
+    <script src="js/src/view/fight/GuajiView.js"></script>
+    <script src="js/src/view/shengling/ShenglingView.js"></script>
+    <script src="js/src/view/shengling/BuzhenView.js"></script>
+    <script src="js/src/view/hud/MenuView.js"></script>
+    <script src="js/src/view/hud/MainView.js"></script>
+    <script src="js/src/view/hud/PlayerInfoView.js"></script>
+    <script src="js/src/view/hud/ChatView.js"></script>
+    <script src="js/src/view/common/CheatView.js"></script>
+    <script src="js/src/view/jingji/JingjiView.js"></script>
+    <script src="js/src/view/fuwen/FuwenView.js"></script>
+    <!--jsfile--login-->
+    <script src="js/src/view/login/LoadingView.js"></script>
+    <script src="js/src/view/login/CreatorRoleView.js"></script>
+    <script src="js/src/view/login/LoginView.js"></script>
+    <!--jsfile-启动类-Main-->
+    <script src="js/src/App.js"></script>
+    <script src="js/src/Launch.js"></script>
+    <!--jsfile--Main-->
+
+</body>
+<canvas id="LoadCanvas" width="800" height="100" style="z-index:0"></canvas>
+</html>

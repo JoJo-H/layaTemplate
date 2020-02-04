@@ -5,6 +5,11 @@ module core {
         return new Date(v).toTimeString();
     };
 
+    export function logcore(...args: any[]): void {
+        if (API.logLevel < 10) return;
+        console.log(getTimeShortStr(Laya.timer.currTimer), ...args);
+    }
+
     /**
      * @param args 打印错误
      */
@@ -29,9 +34,4 @@ module core {
         console.error(getTimeShortStr(Laya.timer.currTimer), "[E]", ...args);
     }
 
-    export function logTest(...args: any[]): void {
-        if (API.logLevel < 6) return;
-        let time = getTimeShortStr(Laya.timer.currTimer);
-        console.log(`%c hgy:${time} `, 'color:#ff0000', ...args);
-    }
 }

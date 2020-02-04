@@ -3,7 +3,7 @@ var core;
     /**
      * 回调数据结构，提供this绑定功能
      */
-    class Callback extends egret.HashObject {
+    class Callback extends Object {
         /**
          * @param  {Function} callback
          * @param  {any} thisObj

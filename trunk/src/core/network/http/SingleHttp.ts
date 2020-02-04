@@ -2,12 +2,13 @@
 module core {
 
     export class SingleHttp {
+        public httpId : number = 0;
 
         private _http: Laya.HttpRequest;
         /** 请求url */
         private _reqUrl:string;
         /** 请求参数 */
-        private _parmData:Object;
+        private _parmData:any;
         /** 回调自定义参数 */
         private _backArgs: any[];
         /** 成功回调函数 */
@@ -16,53 +17,113 @@ module core {
         private _requestFail: Function;
         /** 重试次数 */
         private _tryTime : number;
+        /** 是否需要遮罩 */
+        private _maskFlag : boolean;
+        /** 是否已完成请求 */
         private _isFinish : boolean;
+        private _timeout : number;
+        /** 是否在等待中 */
+        private _hasWaiting : boolean;
+        private _method : string;
+        private _responseType : string;
         constructor() {
+        }
+        /** 初始化 */
+        initHttp():void {
             this._tryTime = 3;
             this._isFinish = false;
-            this._http = new Laya.HttpRequest();
-            this._http.http.timeout = 10000;//设置超时时间；
-            this._http.http.responseType = "arraybuffer";
+            this._maskFlag = false;
+            this._hasWaiting = false;
+            this._method = "get";
+            this._responseType = "arraybuffer";
+            if(!this._http) {
+                this._http = new Laya.HttpRequest();
+                this._http.http.timeout = 5000;//设置超时时间；
+                this._http.http.responseType = this._responseType;
+                if(is.fun(this._http.http.setRequestHeader)){
+                    this._http.http.setRequestHeader("Content-Type", "application/octet-stream;charset=UTF-8");
+                }
+            }
             this._http.on(Laya.Event.COMPLETE, this, this.completeHandler);
             this._http.on(Laya.Event.ERROR, this, this.errorHandler);
-            // this._http.on(Laya.Event.PROGRESS, this, this.processHandler);
+            this._http.http.ontimeout = this.timeoutHandler.bind(this);
             // this._http.send("res/data.data", "", "get", "text");
             // this._http.send("http:xxx.xxx.com?a=xxxx&b=xxx", "", "get", "text");
             // this._http.send("http:xxx.xxx.com", "a=xxxx&b=xxx", "post", "text");
+        }
+        /** 回收 */
+        public recovery():void {
+            if(is.fun(this._http.http.abort)){
+                this._http.http.abort()
+            }
+            this._http.offAll();
+            this._http.http.ontimeout = null;
+        }
+
+        /** 清除 */
+        private clear(): void {
+            this._isFinish = true;
+            this._tryTime = 0;
+            this._reqUrl = null;
+            this._parmData = null;
+            this._backArgs = null;
+            if (this._requestSuccess) {
+                this._requestSuccess = null;
+            }
+            if (this._requestFail) {
+                this._requestFail = null;
+            }
+            if (this._hasWaiting) {
+				core.hideWaiting();
+				this._hasWaiting = false;
+			}
+            this._maskFlag = false;
+            clearTimeout(this._timeout);
+            clearTimeout(this._tryTimeout);
+            network.recovery(this);
         }
 
         /**
          * 添加请求回调
          */
-        addCallback(requestSuccess: Function = null, requestFail: Function = null) {
+        addCallback(backArgs: any[] = null,requestSuccess: Function = null, requestFail: Function = null) {
+            this._backArgs = backArgs;
             this._requestSuccess = requestSuccess;
             this._requestFail = requestFail;
         }
-
-        addBackArgs(backArgs: any[] = null) {
-            this._backArgs = backArgs;
+       
+        /** 添加请求数据 */
+        addData( reqUrl: string,data: any,showMask:boolean=true,method:string="get",responseType:string="arraybuffer"): void {
+            this._reqUrl=reqUrl;
+            this._parmData=data;
+            this._maskFlag = showMask;
+            this._method = method;
+            this._responseType = responseType;
         }
 
-        //请求登录
-        send(url: string, data: any, method: string, contenttype?): void {
-            if (this._tryTime > 0) {
-                this._tryTime--;
-                if (this._http) {
-                    let ctype = contenttype ? contenttype : "application/x-www-form-urlencoded;charset=UTF-8";
-                    let headers = ["Content-Type", ctype];
-                    let parmStr = "";
-                    if (is.object(data)) {
-                        parmStr = this.parseParms(data)
-                    } else {
-                        parmStr = data;
-                    }
-                    if (method == "get") {
-                        url += "/?" + parmStr;
-                    }
-                    this._http.send(url, (method == "get") ? "" : parmStr, method, "text", headers);
-                }
+        /** 发送请求 */
+        send(): void {
+            this._tryTime--;
+			if (this._maskFlag) {
+                // 一秒内有数据响应就不显示遮罩
+				this._timeout = setTimeout(() => {
+					core.showWaiting();
+					this._hasWaiting = true;
+				}, 1000);
+			}
+            let parmStr = "";
+            if (is.object(this._parmData)) {
+                parmStr = this.parseParms(this._parmData)
+            } else {
+                parmStr = this._parmData;
             }
+            let url = this._reqUrl;
+            if (this._method == "get") {
+                url += "/?" + parmStr;
+            }
+            this._http.send(url, (this._method == "get") ? "" : parmStr, this._method, "text");
         }
+
         /** 解析参数 */
         private parseParms(object): string {
             let parms: string = "";
@@ -84,43 +145,40 @@ module core {
                         this._requestSuccess(response);
                     }
                 }
+            }else{
+                logerror("completeHandler: data is null",this.httpId);
             }
-            //todo
-            this.requestClear();
-        }
-
-        /** 响应进度 */
-        private processHandler(data: any): void {
-            logdebug("requestProgress:",data);
+            this.clear();
         }
 
         /** 响应失败 */
         private errorHandler(event: Laya.Event): void {
-            this.requestClear();
-            core.showAlert({
-                text: "获取数据失败，请稍后重试！", 
-                confirmCb: () => {
-                    
-                }
-            });
+            logerror("errorHandler:",this.httpId,event);
+            this.tryAgain();
         }
 
-
-        private requestClear(): void {
-            this._isFinish = true;
-            this._tryTime = 0;
-            this._reqUrl = null;
-            this._parmData = null;
-            if (this._requestSuccess) {
-                this._requestSuccess = null;
-            }
-            if (this._requestFail) {
-                this._requestFail = null;
-            }
-            // this.clearHttp();
+        /** 超时处理 */
+        private timeoutHandler(data: any): void {
+            logerror("timeoutHandler:",this.httpId,data);
+            this.tryAgain();
         }
 
-        public isDone(): boolean {
+        private _tryTimeout : number;
+        /** 重试 */
+		private tryAgain(): void  {
+			if (this._tryTime > 0) {
+                //一秒后再重试
+                this._tryTimeout = setTimeout(() => { 
+                    clearTimeout(this._tryTimeout);
+					this.send();
+				}, 1000);
+			}else {
+				this.clear();
+			}
+		}
+
+        /** 是否结束 */
+        public isFinish(): boolean {
             return this._isFinish;
         }
     }

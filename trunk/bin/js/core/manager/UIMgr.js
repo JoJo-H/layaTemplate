@@ -40,10 +40,11 @@ var core;
          * @param adaptStage 初始化时是否适配舞台尺寸
          */
         registerUI(ui, uiname, atlases, destroyAtlases, depth, popEffect = false, isModal = false, closeOther = false, parentUI = null, isQueue = false, adaptStage = false) {
-            if (!this._uiregistMap[uiname]) {
-                let info = { uiname, cls: ui, atlases, depth, popEffect, isModal, closeOther, parentUI, destroyAtlases, isQueue, adaptStage };
-                this._uiregistMap[uiname] = info;
+            if (this._uiregistMap[uiname]) {
+                core.logdebug("重复注册ui信息：", uiname);
             }
+            let info = { uiname, cls: ui, atlases, depth, popEffect, isModal, closeOther, parentUI, destroyAtlases, isQueue, adaptStage };
+            this._uiregistMap[uiname] = info;
         }
         /** 注册ui互斥组 */
         registerGroupMutex(group, mutexGroup) {
@@ -241,35 +242,50 @@ var core;
         }
     }
     core.UIMgr = UIMgr;
-    /**显示ui */
+    /** 注册ui */
+    function registerUI(ui, uiname, atlases, destroyAtlases, depth, popEffect = false, isModal = false, closeOther = false, parentUI = null, isQueue = false, adaptStage = false) {
+        UIMgr.getInstance().registerUI(ui, uiname, atlases, destroyAtlases, depth, popEffect, isModal, closeOther, parentUI, isQueue, adaptStage);
+    }
+    core.registerUI = registerUI;
+    /** 显示ui */
     function showUI(uiname, dataSource, sound = true, preinit = false) {
         UIMgr.getInstance().showUI(uiname, dataSource);
     }
     core.showUI = showUI;
-    /**隐藏ui */
+    /** 隐藏ui */
     function hideUIByName(uiname, showEffect) {
         UIMgr.getInstance().hideUIByName(uiname, showEffect);
     }
     core.hideUIByName = hideUIByName;
+    /** 隐藏ui */
     function hideUIByDepth(depths, excludes = []) {
         UIMgr.getInstance().hideUIByDepth(depths, excludes);
     }
     core.hideUIByDepth = hideUIByDepth;
+    /** 获取ui */
     function getUIByName(uiname) {
         return UIMgr.getInstance().getUIByName(uiname);
     }
     core.getUIByName = getUIByName;
+    /** ui是否在舞台 */
     function hasStage(uiname) {
         return UIMgr.getInstance().hasStage(uiname);
     }
     core.hasStage = hasStage;
+    /** 某个group的ui是否在舞台 */
     function hasStageByGroup(uiname) {
         return UIMgr.getInstance().hasStageByGroup(uiname);
     }
     core.hasStageByGroup = hasStageByGroup;
+    /** 是否有队列弹窗 */
     function hasQueueDialog() {
         return UIMgr.getInstance().hasQueueDialog();
     }
     core.hasQueueDialog = hasQueueDialog;
+    /** 是否注册过ui */
+    function hasRegisterUI(uiname) {
+        return UIMgr.getInstance().getUIInfo(uiname) ? true : false;
+    }
+    core.hasRegisterUI = hasRegisterUI;
 })(core || (core = {}));
 //# sourceMappingURL=UIMgr.js.map

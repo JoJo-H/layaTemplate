@@ -20,37 +20,37 @@ var common;
             //logo
             this.logo = new Laya.Image("preload/logo_da.png");
             this.logo.centerX = 0;
-            this.logo.y = 70 + Launch.offsetY;
+            this.logo.y = 70 + core.API.offsetY;
             //tip
             this.tip = new Laya.Label("首次加载时间较长，请耐心等待");
             this.tip.anchorX = 0.5;
             this.tip.x = this.width >> 1;
-            this.tip.y = 1131 + Launch.offsetY;
+            this.tip.y = 1131 + core.API.offsetY;
             this.tip.color = ColorConst.ZONGSE;
             this.tip.fontSize = 23;
             //刷新
             this.lbl_refreh = new Laya.Label("点击刷新");
-            this.lbl_refreh.x = 530 + Launch.offsetX;
-            this.lbl_refreh.y = 1131 + Launch.offsetY;
+            this.lbl_refreh.x = 530 + core.API.offsetX;
+            this.lbl_refreh.y = 1131 + core.API.offsetY;
             this.lbl_refreh.align = "center";
             this.lbl_refreh.color = ColorConst.GREEN;
             this.lbl_refreh.fontSize = 23;
             this.lbl_refreh.underline = true;
             this.lbl_refreh.once(Laya.Event.CLICK, this, () => {
-                BingoSDK.gameRefresh();
+                // BingoSDK.gameRefresh();
             });
             // 批准文号：新广出审[2017]3428号 ISBN：978-7-7979-6890-4  出版服务单位：北京科海电子出版社  著作权人：福州天米互动游戏有限公司  著作权登记号：2016SR017541
             //新广出审[2017]3428 号；
             this.lbl_info = new Laya.Label("新广出审[2017]3428号 ISBN：978-7-7979-6890-4  出版单位：北京科海电子出版社");
             this.lbl_info.centerX = 0;
-            this.lbl_info.y = 1200 + Launch.offsetY;
+            this.lbl_info.y = 1200 + core.API.offsetY;
             this.lbl_info.align = "center";
             this.lbl_info.color = ColorConst.ZONGSE;
             this.lbl_info.fontSize = 18;
             //网络游戏出版物号：ISBN 978-7-7979-6890-4 
             this.lbl_info2 = new Laya.Label("著作权人：福州天米互动游戏有限公司  登记号：2016SR017541");
             this.lbl_info2.centerX = 0;
-            this.lbl_info2.y = 1230 + Launch.offsetY;
+            this.lbl_info2.y = 1230 + core.API.offsetY;
             this.lbl_info2.align = "center";
             this.lbl_info2.color = ColorConst.ZONGSE;
             this.lbl_info2.fontSize = 18;
@@ -61,8 +61,8 @@ var common;
             this.lbl_progress = new Laya.Label("加载中......");
             //box
             this.box_bar = new Laya.Box();
-            this.box_bar.x = 26 + Launch.offsetX;
-            this.box_bar.y = 1046 + Launch.offsetY;
+            this.box_bar.x = 26 + core.API.offsetX;
+            this.box_bar.y = 1046 + core.API.offsetY;
             this.box_bar.width = 668;
             this.box_bar.height = 75;
             //

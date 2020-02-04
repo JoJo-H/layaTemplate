@@ -11,6 +11,7 @@ module core {
         constructor(){
             super();
             this.bgSpr = new Laya.Sprite();
+            this.bgSpr.alpha = 0.8;
             this.addChild(this.bgSpr);
         }
         setSize(w,h):void {

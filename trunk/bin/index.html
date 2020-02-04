@@ -26,8 +26,16 @@
 	<script type="text/javascript" src="libs/laya.wxmini.js"></script>
 	<!--提供了百度小游戏的适配-->
 	<script type="text/javascript" src="libs/laya.bdmini.js"></script>
+	<!--提供了小米小游戏的适配-->
+	<script type="text/javascript" src="libs/laya.xmmini.js"></script>
+ 	<!--提供了OPPO小游戏的适配-->
+ 	<script type="text/javascript" src="libs/laya.quickgamemini.js"></script>
+	<!--提供了qq小游戏的适配-->
+	<script type="text/javascript" src="libs/laya.qqmini.js"></script>
 	<!--封装了webgl渲染管线，如果使用webgl渲染，可以在初始化时调用Laya.init(1000,800,laya.webgl.WebGL);-->
     <script type="text/javascript" src="libs/laya.webgl.js"></script>
+	<!--提供了VIVO小游戏的适配-->
+	<script type="text/javascript" src="libs/laya.vvmini.js"></script>
 	<!--是动画模块，包含了swf动画，骨骼动画等-->
     <script type="text/javascript" src="libs/laya.ani.js"></script>
 	<!--包含更多webgl滤镜，比如外发光，阴影，模糊以及更多-->
@@ -56,6 +64,7 @@
 	<script src="js/game/UIConst.js"></script>
 	<script src="js/game/Player.js"></script>
 	<script src="js/core/vo/Dictionary.js"></script>
+	<script src="js/core/utils/str.js"></script>
 	<script src="js/core/utils/singleton.js"></script>
 	<script src="js/core/utils/is.js"></script>
 	<script src="js/core/utils/console.js"></script>
@@ -63,13 +72,17 @@
 	<script src="js/core/utils/RegConst.js"></script>
 	<script src="js/core/utils/DateUtil.js"></script>
 	<script src="js/core/utils/BrowerUtil.js"></script>
+	<script src="js/core/network/network.js"></script>
+	<script src="js/core/network/http/SingleHttp.js"></script>
+	<script src="js/core/network/http/NativeHttp.js"></script>
 	<script src="js/core/mvc/EventManager.js"></script>
 	<script src="js/core/manager/UIMgr.js"></script>
 	<script src="js/core/manager/ResUseMgr.js"></script>
+	<script src="js/core/inface/IMsgHandler.js"></script>
+	<script src="js/core/inface/IAlertVo.js"></script>
 	<script src="js/core/core.js"></script>
+	<script src="js/core/ApiConst.js"></script>
 	<script src="js/core/Api.js"></script>
-	<script src="js/Main.js"></script>
-	<script src="js/GameConfig.js"></script>
 	<script src="js/App.js"></script>
 	<script src="js/ui/layaUI.max.all.js"></script>
 	<script src="js/core/component/BuffRenderList.js"></script>
@@ -77,6 +90,8 @@
 	<script src="js/core/mvc/BaseEvent.js"></script>
 	<script src="js/core/component/Accordion.js"></script>
 	<script src="js/core/component/DialogExt.js"></script>
+	<script src="js/core/inface/IAlertView.js"></script>
+	<script src="js/core/component/AlertView.js"></script>
 	<script src="js/core/inface/ITabList.js"></script>
 	<script src="js/core/component/ListBase.js"></script>
 	<script src="js/core/inface/ILoadingView.js"></script>
@@ -94,13 +109,9 @@
 	<script src="js/core/mvc/Module.js"></script>
 	<script src="js/core/mvc/inface/IObserver.js"></script>
 	<script src="js/core/mvc/Observer.js"></script>
-	<script src="js/core/vo/EventData.js"></script>
+	<script src="js/game/RequestMsgHandler.js"></script>
 	<script src="js/game/common/component/Combobox.js"></script>
 	<script src="js/game/common/component/LoadingView.js"></script>
-	<script src="js/script/Bullet.js"></script>
-	<script src="js/script/DropBox.js"></script>
-	<script src="js/script/GameControl.js"></script>
-	<script src="js/script/GameUI.js"></script>
 	<!--jsfile--endTag-->
 
 	<!--启动类添加到这里-->

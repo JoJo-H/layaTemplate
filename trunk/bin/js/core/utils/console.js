@@ -4,6 +4,12 @@ var core;
     var getTimeShortStr = (v) => {
         return new Date(v).toTimeString();
     };
+    function logcore(...args) {
+        if (core.API.logLevel < 10)
+            return;
+        console.log(getTimeShortStr(Laya.timer.currTimer), ...args);
+    }
+    core.logcore = logcore;
     /**
      * @param args 打印错误
      */
@@ -31,12 +37,5 @@ var core;
         console.error(getTimeShortStr(Laya.timer.currTimer), "[E]", ...args);
     }
     core.logerror = logerror;
-    function logTest(...args) {
-        if (core.API.logLevel < 6)
-            return;
-        let time = getTimeShortStr(Laya.timer.currTimer);
-        console.log(`%c hgy:${time} `, 'color:#ff0000', ...args);
-    }
-    core.logTest = logTest;
 })(core || (core = {}));
 //# sourceMappingURL=console.js.map

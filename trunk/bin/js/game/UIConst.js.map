@@ -1,1 +1,1 @@
-{"version":3,"file":"UIConst.js","sourceRoot":"","sources":["../../../src/game/UIConst.ts"],"names":[],"mappings":"AACA,IAAO,IAAI,CAQV;AARD,WAAO,IAAI;IAEP,MAAa,OAAO;;IACT,iBAAS,GAAW,KAAK,CAAC,CAAO,OAAO;IAC/C,eAAe;IACR,iBAAS,GAAW,KAAK,CAAC;IAC1B,mBAAW,GAAW,OAAO,CAAC;IAJ5B,YAAO,UAKnB,CAAA;AACL,CAAC,EARM,IAAI,KAAJ,IAAI,QAQV"}
+{"version":3,"file":"UIConst.js","sourceRoot":"","sources":["../../../src/game/UIConst.ts"],"names":[],"mappings":"AACA,MAAM,OAAO;;AACF,iBAAS,GAAW,KAAK,CAAC,CAAO,OAAO;AAC/C,eAAe;AACR,iBAAS,GAAW,KAAK,CAAC;AAC1B,mBAAW,GAAW,OAAO,CAAC"}

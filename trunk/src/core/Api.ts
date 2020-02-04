@@ -15,7 +15,7 @@ module core {
         static SCENE_HEIGHT: number = 1280;
         public static offsetY : number = 0;
         public static offsetX : number = 0;
-        startRun():void {
+        static startRun():void {
             UIConfig.closeDialogOnSide = true;
             UIConfig.popupBgAlpha = 0.7;
             DialogExt.manager = new DialogExtMgr();
@@ -26,6 +26,7 @@ module core {
             API.offsetX = (Laya.stage.width - API.SCENE_WIDTH) >> 1;
             API.offsetY = (Laya.stage.height - API.SCENE_HEIGHT) >> 1;
 
+            core.NativeHttp
         }
     }
 

@@ -9,6 +9,7 @@ module core {
         constructor(){
             super();
             this.bgSpr = new Laya.Sprite();
+            this.bgSpr.alpha = 0.5;
             this.addChild(this.bgSpr);
             this.lbLoad = new Laya.Label();
             this.lbLoad.align = "center";

@@ -1,0 +1,14 @@
+<res>
+   <item name="comp/tab" type="" compress="0" pack="0" quality="80" props="" picType="0" scale="0"/>
+   <item name="comp/scroll/vscroll.png" type="VScrollBar" compress="0" pack="1" quality="80" props="sizeGrid=75,4,62,6" picType="0" scale="0"/>
+   <item name="comp/bg/jinengdikuang24.png" type="Image" compress="0" pack="0" quality="80" props="" picType="1" scale="0"/>
+   <item name="comp/bg/zhankai.png" type="Image" compress="0" pack="0" quality="80" props="sizeGrid=10,10,10,10" picType="0" scale="0"/>
+   <item name="comp/bg/dikuang_duizhangji.png" type="Image" compress="0" pack="0" quality="80" props="sizeGrid=10,10,10,10" picType="0" scale="0"/>
+   <item name="comp/bg/kuang.png" type="Image" compress="0" pack="0" quality="80" props="sizeGrid=14,15,15,15" picType="0" scale="0"/>
+   <item name="comp/bg/dikuang4.png" type="Image" compress="0" pack="0" quality="80" props="" picType="0" scale="0"/>
+   <item name="jingji/goumai/dikuang.png" type="Image" compress="0" pack="0" quality="80" props="sizeGrid=0,23,0,21" picType="0" scale="0"/>
+   <item name="comp/bg/dikuang5.png" type="Image" compress="0" pack="0" quality="80" props="sizeGrid=0,17,0,15" picType="0" scale="0"/>
+   <item name="comp/bg/kuang.png" type="Image" compress="0" pack="0" quality="80" props="sizeGrid=15,15,15,15" picType="0" scale="0"/>
+   <item name="hud/banniang.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="comp/bg/kuang2.png" type="Image" compress="0" pack="0" quality="80" props="sizeGrid=8,8,8,8" picType="0" scale="0"/>
+</res>

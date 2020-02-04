@@ -1,0 +1,9 @@
+1,0.00,,0,Project command:/Users/huangguoyong/SelfWorkspace/layabox/layaTemplate/trunk/.actionScriptProperties;iflash=false;windowshow=false;chromerun=false;quickcompile=true
+Project configuration:/Users/huangguoyong/SelfWorkspace/layabox/layaTemplate/trunk/.actionScriptProperties.
+7,0.00,,0,Read FB err:/Users/huangguoyong/SelfWorkspace/layabox/layaTemplate/trunk/.actionScriptProperties
+1,2.00,,0,read class message
+1,2.00,,0,Disable Flash3D 
+12,2.00,.max.js,7018,
+11,2.00,.max.html,883,
+******************************************************************************
+14,2.00,,0,
