@@ -5,7 +5,7 @@ var core;
         core.logdebug("showLoading...");
         if (!core.hasRegisterUI(core.ApiConst.LoadingView)) {
             let clz = core.API.loadingView || core.LoadingView;
-            core.registerUI(clz, core.ApiConst.LoadingView, null, null, core.UI_DEPATH_VALUE.LOADING, false, true, false, null, false, true);
+            core.registerUI(clz, core.ApiConst.LoadingView, null, null, core.UI_DEPATH_VALUE.LOADING, false, false, false, null, false, true);
         }
         core.showUI(core.ApiConst.LoadingView, text);
     }
@@ -36,7 +36,7 @@ var core;
         core.logdebug("showWaiting...");
         if (!core.hasRegisterUI(core.ApiConst.WaitView)) {
             let clz = core.API.waitView || core.WaitView;
-            core.registerUI(clz, core.ApiConst.WaitView, null, null, core.UI_DEPATH_VALUE.WAITING, false, true, false, null, false, true);
+            core.registerUI(clz, core.ApiConst.WaitView, null, null, core.UI_DEPATH_VALUE.WAITING, false, false, false, null, false, true);
         }
         core.showUI(core.ApiConst.WaitView, text);
     }

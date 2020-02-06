@@ -1,0 +1,2 @@
+python do.py
+pause

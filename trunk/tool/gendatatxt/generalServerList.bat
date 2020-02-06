@@ -1,0 +1,2 @@
+python doServerList.py
+pause

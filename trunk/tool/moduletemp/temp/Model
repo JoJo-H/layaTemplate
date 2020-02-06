@@ -1,0 +1,14 @@
+/**
+* &Model
+*/
+module game{
+	export class &Model{
+		private static _instance: &Model;
+		static getInstance(): &Model {
+			if (!&Model._instance) {
+				&Model._instance = new &Model();
+			}
+			return &Model._instance;
+		}
+	}
+}

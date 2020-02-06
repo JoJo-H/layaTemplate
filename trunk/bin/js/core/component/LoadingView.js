@@ -3,11 +3,14 @@ var core;
     class LoadingView extends core.DialogExt {
         constructor() {
             super();
+            this._percent = 0;
             this.bgSpr = new Laya.Sprite();
             this.bgSpr.alpha = 0.5;
             this.addChild(this.bgSpr);
             this.lbLoad = new Laya.Label();
             this.lbLoad.align = "center";
+            this.lbLoad.fontSize = 25;
+            this.addChild(this.lbLoad);
         }
         setSize(w, h) {
             super.setSize(w, h);
@@ -15,9 +18,9 @@ var core;
             this.bgSpr.width = w;
             this.bgSpr.height = h;
             this.bgSpr.graphics.clear();
-            this.bgSpr.graphics.drawRect(0, 0, w, h, "#ffffff", "#000000", 2);
+            this.bgSpr.graphics.drawRect(0, 0, w, h, "#000000", "#000000", 2);
             this.lbLoad.width = w - 100;
-            this.lbLoad.y = h / 2 - 200;
+            this.lbLoad.y = h / 2 - +200;
         }
         show(closeOther, showEffect) {
             super.show(closeOther, showEffect);

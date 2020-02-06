@@ -1,1 +1,1 @@
-{"version":3,"file":"UIConst.js","sourceRoot":"","sources":["../../../src/game/UIConst.ts"],"names":[],"mappings":"AACA,MAAM,OAAO;;AACF,iBAAS,GAAW,KAAK,CAAC,CAAO,OAAO;AAC/C,eAAe;AACR,iBAAS,GAAW,KAAK,CAAC;AAC1B,mBAAW,GAAW,OAAO,CAAC"}
+{"version":3,"file":"UIConst.js","sourceRoot":"","sources":["../../../src/game/UIConst.ts"],"names":[],"mappings":"AACA,MAAM,OAAO;;AACF,iBAAS,GAAW,KAAK,CAAC,CAAO,OAAO;AAC/C,eAAe;AACR,iBAAS,GAAW,KAAK,CAAC;AAC1B,mBAAW,GAAW,OAAO,CAAC;AAE9B,gBAAQ,GAAY,UAAU,CAAC"}

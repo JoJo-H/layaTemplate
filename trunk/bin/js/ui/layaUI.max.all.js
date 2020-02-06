@@ -5,7 +5,7 @@ var ui;
 (function (ui) {
     var test;
     (function (test) {
-        class TestPageUI extends View {
+        class TestPageUI extends DialogExt {
             constructor() { super(); }
             createChildren() {
                 super.createChildren();

@@ -4,4 +4,6 @@ class UIConst {
     /**二级界面group */
     static two_group: string = "two";
     static login_group: string = "login";
+
+    static MainView : string = "MainView";
 }

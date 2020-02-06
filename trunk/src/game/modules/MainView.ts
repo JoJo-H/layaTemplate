@@ -4,7 +4,7 @@ import Handler = Laya.Handler;
 import Loader = Laya.Loader;
 import WebGL = Laya.WebGL;
 
-class TestUI extends ui.test.TestPageUI {
+class MainView extends ui.test.TestPageUI {
 
 	constructor() {
 		super();
@@ -51,25 +51,4 @@ class TestUI extends ui.test.TestPageUI {
 			label.color = "#000000";
 		}
 	}
-}
-
-//程序入口
-Laya.init(core.API.SCENE_WIDTH, core.API.SCENE_HEIGHT, Laya.WebGL);
-core.API.startRun();
-// Laya.URL.basePath = "http://localhost:3333/layabox/layaTemplate/trunk/bin/";
-Laya.ResourceVersion.type = Laya.ResourceVersion.FILENAME_VERSION;
-//激活资源版本控制
-Laya.ResourceVersion.enable("version.json", Handler.create(null, beginLoad));
-function beginLoad(){
-	Laya.loader.load("ui.json", Handler.create(this, this.onLoadRes), Handler.create(this, this.onUIProgress));
-}
-function onLoadRes(data): void {
-	View.uiMap = data;
-	Laya.loader.load(["res/atlas/comp.atlas","ui.json"], Handler.create(null, onStartGame));
-}
-
-function onStartGame(): void {
-	//实例UI界面
-	var testUI: TestUI = new TestUI();
-	Laya.stage.addChild(testUI);
 }

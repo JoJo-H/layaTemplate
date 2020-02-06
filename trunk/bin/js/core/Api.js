@@ -10,7 +10,6 @@ var core;
             core.DialogExt.manager.zOrder = 0;
             API.offsetX = (Laya.stage.width - API.SCENE_WIDTH) >> 1;
             API.offsetY = (Laya.stage.height - API.SCENE_HEIGHT) >> 1;
-            core.NativeHttp;
         }
     }
     /** 越大表示打印等级越大,打印类型越多 1表示只打印error, 2表示打印error和warn, 3表示打印debug... */

@@ -1,0 +1,36 @@
+class Launch {
+    constructor() {
+        Laya.init(core.API.SCENE_WIDTH, core.API.SCENE_HEIGHT, Laya.WebGL);
+        if (Laya.Browser.onPC) {
+            Laya.stage.scaleMode = Laya.Stage.SCALE_SHOWALL;
+        }
+        else {
+            Laya.stage.scaleMode = Laya.Stage.SCALE_FIXED_AUTO;
+        }
+        Laya.stage.alignH = Laya.Stage.ALIGN_CENTER;
+        Laya.stage.mouseThrough = true;
+        Laya.stage.bgColor = "#000";
+        Laya.SoundManager.autoStopMusic = false;
+        Laya.SoundManager.useAudioMusic = false;
+        Laya.loader.maxLoader = 1;
+        //设置舞台宽高
+        Laya.stage.setScreenSize(Laya.Browser.clientWidth * Laya.Browser.pixelRatio, Laya.Browser.clientHeight * Laya.Browser.pixelRatio);
+        core.API.startRun();
+        // Laya.URL.basePath = "http://localhost:3333/layabox/layaTemplate/trunk/bin/";
+        Laya.ResourceVersion.type = Laya.ResourceVersion.FILENAME_VERSION;
+        //激活资源版本控制
+        Laya.ResourceVersion.enable("version.json", Handler.create(this, this.beginLoad));
+    }
+    beginLoad() {
+        Laya.loader.load("ui.json", Handler.create(this, this.onLoadRes));
+    }
+    onLoadRes(data) {
+        View.uiMap = data;
+        Laya.loader.load(["res/atlas/comp.atlas", "ui.json"], Handler.create(this, this.onStartGame));
+    }
+    onStartGame() {
+        core.registerUI(MainView, UIConst.MainView, null, null, core.UI_DEPATH_VALUE.BOTTOM, false, true, false, null, false, true);
+        core.showUI(UIConst.MainView);
+    }
+}
+//# sourceMappingURL=Launch.js.map

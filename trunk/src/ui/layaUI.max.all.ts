@@ -3,7 +3,7 @@ import View=laya.ui.View;
 import Dialog=laya.ui.Dialog;
 import DialogExt=core.DialogExt;
 module ui.test {
-    export class TestPageUI extends View {
+    export class TestPageUI extends DialogExt {
 		public btn:Laya.Button;
 		public clip:Laya.Clip;
 		public combobox:Laya.ComboBox;

@@ -26,7 +26,6 @@ module core {
             API.offsetX = (Laya.stage.width - API.SCENE_WIDTH) >> 1;
             API.offsetY = (Laya.stage.height - API.SCENE_HEIGHT) >> 1;
 
-            core.NativeHttp
         }
     }
 

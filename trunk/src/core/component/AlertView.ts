@@ -13,6 +13,7 @@ module core {
             this.bgSpr = new Laya.Sprite();
             this.bgSpr.alpha = 0.8;
             this.addChild(this.bgSpr);
+            this.setSize(400,400);
         }
         setSize(w,h):void {
             super.setSize(w,h);
@@ -20,7 +21,7 @@ module core {
             this.bgSpr.width = w;
             this.bgSpr.height = h;
             this.bgSpr.graphics.clear();
-            this.bgSpr.graphics.drawRect(0,0,w,h,"#ffffff","#000000",2);
+            this.bgSpr.graphics.drawRect(0,0,w,h,"#000000","#000000",2);
         }
 
         createChildren():void {
@@ -28,7 +29,7 @@ module core {
             this.isModalClose = true;
             // 内容
             this._htmlText = new Laya.HTMLDivElement();
-            this._htmlText.style.color = "#000000";
+            this._htmlText.style.color = "#ffffff";
             this._htmlText.style.wordWrap = true;
             this._htmlText.mouseEnabled = false;
             this._htmlText.style.align = "center";

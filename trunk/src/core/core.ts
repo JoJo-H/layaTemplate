@@ -7,7 +7,7 @@ module core {
 		logdebug("showLoading...");
 		if (!core.hasRegisterUI(ApiConst.LoadingView)) {
             let clz = API.loadingView || LoadingView;
-			core.registerUI(clz,ApiConst.LoadingView,null,null,UI_DEPATH_VALUE.LOADING,false,true,false,null,false,true);
+			core.registerUI(clz,ApiConst.LoadingView,null,null,UI_DEPATH_VALUE.LOADING,false,false,false,null,false,true);
 		}
 		core.showUI(ApiConst.LoadingView,text);
 	}
@@ -39,7 +39,7 @@ module core {
 		logdebug("showWaiting...");
 		if (!core.hasRegisterUI(ApiConst.WaitView)) {
             let clz = API.waitView || WaitView;
-			core.registerUI(clz,ApiConst.WaitView,null,null,UI_DEPATH_VALUE.WAITING,false,true,false,null,false,true);
+			core.registerUI(clz,ApiConst.WaitView,null,null,UI_DEPATH_VALUE.WAITING,false,false,false,null,false,true);
 		}
 		core.showUI(ApiConst.WaitView,text);
 	}

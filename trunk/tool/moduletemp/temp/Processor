@@ -1,0 +1,41 @@
+module game {
+    /*
+    * &Processor
+    */
+    export class &Processor extends tl3d.Processor {
+        constructor() {
+            super();
+        }
+        private _model: &Model = &Model.getInstance();
+
+        public getName(): string {
+            return "&Processor";
+        }
+
+        //监听事件
+        protected listenModuleEvents(): Array<tl3d.BaseEvent> {
+            return [
+                new &Event(&Event.EMPTY_EVENT),
+            ];
+        }
+
+        //处理事件
+        protected receivedModuleEvent(event: tl3d.BaseEvent): void {
+            if (event instanceof &Event) {
+                switch (event.type) {
+                    case &Event.EMPTY_EVENT:
+                        this.empty(event.data);
+                        break;
+                }
+            }
+        }
+
+        /**
+         * 默认函数
+         */
+        private empty(data) {
+ 
+        }
+
+    }
+}

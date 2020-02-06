@@ -1,0 +1,235 @@
+
+    <script type='text/javascript' src='libs/min/laya.core.min.js'></script>
+    <script type='text/javascript' src='libs/min/laya.webgl.min.js'></script>
+    <script type='text/javascript' src='libs/min/laya.ani.min.js'></script>
+    <script type='text/javascript' src='libs/min/laya.filter.min.js'></script>
+    <script type='text/javascript' src='libs/min/laya.html.min.js'></script>
+    <script type='text/javascript' src='libs/min/laya.ui.min.js'></script>
+    <script type='text/javascript' src='libs/inflate.min.js'></script>
+    <script type='text/javascript' src='md5.js'></script>
+    <script type='text/javascript' src='bingame_sdk_ios.js'></script>
+    <script type='text/javascript' src='extconfig_wx.js'></script>
+    <script type='text/javascript' src='vconsole.min.js'></script>
+    
+    <script src='js/tl3d/engine/events/Event.js'></script>
+    <script src='js/tl3d/engine/events/EventDispatcher.js'></script>
+    <script src='js/tl3d/engine/base/GC.js'></script>
+    <script src='js/tl3d/engine/base/ResCount.js'></script>
+    <script src='js/tl3d/engine/base/ResGC.js'></script>
+    <script src='js/tl3d/engine/base/Object3D.js'></script>
+    <script src='js/tl3d/engine/base/Camera3D.js'></script>
+    <script src='js/tl3d/engine/base/ObjData.js'></script>
+    <script src='js/tl3d/engine/base/MeshData.js'></script>
+    <script src='js/tl3d/engine/base/Dictionary.js'></script>
+    <script src='js/tl3d/engine/base/ColorType.js'></script>
+    <script src='js/tl3d/engine/base/BitMapData.js'></script>
+    <script src='js/tl3d/engine/context/Context3D.js'></script>
+    <script src='js/tl3d/engine/context/Scene_data.js'></script>
+    <script src='js/tl3d/engine/display3D/Display3D.js'></script>
+    <script src='js/tl3d/engine/display3D/Display3DSprite.js'></script>
+    <script src='js/tl3d/engine/display3D/Display3DSky.js'></script>
+    <script src='js/tl3d/engine/display3D/Display3dMovie.js'></script>
+    <script src='js/tl3d/engine/display3D/Display3dBatchMovie.js'></script>
+    <script src='js/tl3d/engine/display3D/Display3dShadow.js'></script>
+    <script src='js/tl3d/engine/display3D/Display3dBg.js'></script>
+    <script src='js/tl3d/engine/display3D/Display2dMovie.js'></script>
+    <script src='js/tl3d/engine/display3D/Display3DUISprite.js'></script>
+    <script src='js/tl3d/engine/display3D/Display2DSprite.js'></script>
+    <script src='js/tl3d/engine/display3D/Display2DSprite.js'></script>
+    <script src='js/tl3d/engine/display3D/terrain/TerrainDisplay3DSprite.js'></script>
+    <script src='js/tl3d/engine/Engine.js'></script>
+    <script src='js/tl3d/engine/math/MathClass.js'></script>
+    <script src='js/tl3d/engine/math/MathUtil.js'></script>
+    <script src='js/tl3d/engine/math/Matrix3D.js'></script>
+    <script src='js/tl3d/engine/math/Quaternion.js'></script>
+    <script src='js/tl3d/engine/math/Vector3D.js'></script>
+    <script src='js/tl3d/engine/math/Vector2D.js'></script>
+    <script src='js/tl3d/engine/math/Rectangle.js'></script>
+    <script src='js/tl3d/engine/math/Circle.js'></script>
+    <script src='js/tl3d/engine/math/Groundposition.js'></script>
+    <script src='js/tl3d/engine/math/Calculation.js'></script>
+    <script src='js/tl3d/engine/math/TLByteArray.js'></script>
+    <script src='js/tl3d/engine/math/TestTriangle.js'></script>
+    <script src='js/tl3d/engine/program/ProgramManager.js'></script>
+    <script src='js/tl3d/engine/program/Shader3D.js'></script>
+    <script src='js/tl3d/engine/program/BuildShader.js'></script>
+    <script src='js/tl3d/engine/program/MaterialShader.js'></script>
+    <script src='js/tl3d/engine/program/MaterialAnimShader.js'></script>
+    <script src='js/tl3d/engine/program/MaterialBatchAnimShader.js'></script>
+    <script src='js/tl3d/engine/program/SkyShader.js'></script>
+    <script src='js/tl3d/engine/program/Display3DShadowShader.js'></script>
+    <script src='js/tl3d/engine/program/UIShader.js'></script>
+    <script src='js/tl3d/engine/program/UIImageShager.js'></script>
+    <script src='js/tl3d/engine/program/UIMaskShader.js'></script>
+    <script src='js/tl3d/engine/program/Movie2DShader.js'></script>
+    <script src='js/tl3d/engine/program/Sprite2DShader.js'></script>
+    <script src='js/tl3d/engine/program/TerrainDisplay3DShader.js'></script>
+    <script src='js/tl3d/engine/particle/CombineParticleData.js'></script>
+    <script src='js/tl3d/engine/particle/CombineParticle.js'></script>
+    <script src='js/tl3d/engine/particle/ParticleManager.js'></script>
+    <script src='js/tl3d/engine/particle/Display3DParticle.js'></script>
+    <script src='js/tl3d/engine/particle/ParticleData.js'></script>
+    <script src='js/tl3d/engine/particle/ParticleGpuData.js'></script>
+    <script src='js/tl3d/engine/particle/facet/Display3DFacetParticle.js'></script>
+    <script src='js/tl3d/engine/particle/facet/Display3DFacetShader.js'></script>
+    <script src='js/tl3d/engine/particle/facet/ParticleFacetData.js'></script>
+    <script src='js/tl3d/engine/particle/ball/Display3DBallPartilce.js'></script>
+    <script src='js/tl3d/engine/particle/ball/Display3DBallShader.js'></script>
+    <script src='js/tl3d/engine/particle/ball/ParticleBallData.js'></script>
+    <script src='js/tl3d/engine/particle/ball/ParticleBallGpuData.js'></script>
+    <script src='js/tl3d/engine/display3D/BaseDiplay3dSprite.js'></script>
+    <script src='js/tl3d/engine/particle/locus/Display3DLocusPartilce.js'></script>
+    <script src='js/tl3d/engine/particle/locus/Display3DLocusShader.js'></script>
+    <script src='js/tl3d/engine/particle/locus/ParticleLocusData.js'></script>
+    <script src='js/tl3d/engine/particle/locusball/Display3DLocusBallPartilce.js'></script>
+    <script src='js/tl3d/engine/particle/locusball/ParticleLocusballData.js'></script>
+    <script src='js/tl3d/engine/particle/model/Display3DModelPartilce.js'></script>
+    <script src='js/tl3d/engine/particle/model/Display3DModelObjParticle.js'></script>
+    <script src='js/tl3d/engine/particle/model/Display3dModelAnimParticle.js'></script>
+    <script src='js/tl3d/engine/particle/model/ParticleModelData.js'></script>
+    <script src='js/tl3d/engine/particle/follow/Display3DFollowPartilce.js'></script>
+    <script src='js/tl3d/engine/particle/follow/Display3DFollowShader.js'></script>
+    <script src='js/tl3d/engine/particle/follow/ParticleFollowData.js'></script>
+    <script src='js/tl3d/engine/particle/followlocus/Display3DFollowLocusPartilce.js'></script>
+    <script src='js/tl3d/engine/particle/followlocus/Display3DFollowLocusShader.js'></script>
+    <script src='js/tl3d/engine/particle/followlocus/ParticleFollowLocusData.js'></script>
+    <script src='js/tl3d/engine/particle/bone/Display3DBonePartilce.js'></script>
+    <script src='js/tl3d/engine/particle/bone/ParticleBoneData.js'></script>
+    <script src='js/tl3d/engine/particle/ctrl/KeyFrame.js'></script>
+    <script src='js/tl3d/engine/particle/ctrl/TimeLineData.js'></script>
+    <script src='js/tl3d/engine/particle/ctrl/TimeLine.js'></script>
+    <script src='js/tl3d/engine/particle/ctrl/BaseAnim.js'></script>
+    <script src='js/tl3d/engine/particle/ctrl/AxisMove.js'></script>
+    <script src='js/tl3d/engine/particle/ctrl/AxisRotaion.js'></script>
+    <script src='js/tl3d/engine/particle/ctrl/ScaleAnim.js'></script>
+    <script src='js/tl3d/engine/particle/ctrl/ScaleChange.js'></script>
+    <script src='js/tl3d/engine/particle/ctrl/ScaleNoise.js'></script>
+    <script src='js/tl3d/engine/particle/ctrl/SelfRotation.js'></script>
+    <script src='js/tl3d/engine/ui/base/InteractiveEvent.js'></script>
+    <script src='js/tl3d/engine/ui/base/TextAlign.js'></script>
+    <script src='js/tl3d/engine/ui/base/UIAtlas.js'></script>
+    <script src='js/tl3d/engine/ui/base/UIRectangle.js'></script>
+    <script src='js/tl3d/engine/ui/base/UIGridRectangle.js'></script>
+    <script src='js/tl3d/engine/ui/base/UICompenent.js'></script>
+    <script src='js/tl3d/engine/ui/base/UIContainer.js'></script>
+    <script src='js/tl3d/engine/ui/base/UIVirtualContainer.js'></script>
+    <script src='js/tl3d/engine/ui/base/UIData.js'></script>
+    <script src='js/tl3d/engine/ui/base/UIRenderComponent.js'></script>
+    <script src='js/tl3d/engine/ui/base/UIBackImg.js'></script>
+    <script src='js/tl3d/engine/ui/base/UIMask.js'></script>
+    <script src='js/tl3d/engine/ui/compenent/Grid9Compenent.js'></script>
+    <script src='js/tl3d/engine/ui/compenent/FrameCompenent.js'></script>
+    <script src='js/tl3d/engine/ui/compenent/Dis2DUIContianerPanel.js'></script>
+    <script src='js/tl3d/engine/ui/compenent/AlphaUiContianer.js'></script>
+    <script src='js/tl3d/engine/ui/UIManager.js'></script>
+    <script src='js/tl3d/engine/ui/UIStage.js'></script>
+    <script src='js/tl3d/engine/ui/PuiData.js'></script>
+    <script src='js/tl3d/engine/material/TextureRes.js'></script>
+    <script src='js/tl3d/engine/material/TextureManager.js'></script>
+    <script src='js/tl3d/engine/material/ConstItem.js'></script>
+    <script src='js/tl3d/engine/material/TexItem.js'></script>
+    <script src='js/tl3d/engine/material/Material.js'></script>
+    <script src='js/tl3d/engine/material/MaterialManager.js'></script>
+    <script src='js/tl3d/engine/material/DynamicBaseConstItem.js'></script>
+    <script src='js/tl3d/engine/material/DynamicBaseTexItem.js'></script>
+    <script src='js/tl3d/engine/material/MaterialBaseParam.js'></script>
+    <script src='js/tl3d/engine/material/MaterialParam.js'></script>
+    <script src='js/tl3d/engine/material/DynamicConstItem.js'></script>
+    <script src='js/tl3d/engine/material/DynamicTexItem.js'></script>
+    <script src='js/tl3d/engine/scene/tree/QuadTreeNode.js'></script>
+    <script src='js/tl3d/engine/scene/tree/SceneQuadTree.js'></script>
+    <script src='js/tl3d/engine/scene/SceneManager.js'></script>
+    <script src='js/tl3d/engine/skill/SkillManager.js'></script>
+    <script src='js/tl3d/engine/skill/Skill.js'></script>
+    <script src='js/tl3d/engine/skill/SkillData.js'></script>
+    <script src='js/tl3d/engine/skill/vo/SkillVo.js'></script>
+    <script src='js/tl3d/engine/skill/vo/SkillKeyVo.js'></script>
+    <script src='js/tl3d/engine/skill/key/SkillKey.js'></script>
+    <script src='js/tl3d/engine/skill/key/SkillEffect.js'></script>
+    <script src='js/tl3d/engine/skill/key/SkillFixEffect.js'></script>
+    <script src='js/tl3d/engine/skill/key/SkillTrajectory.js'></script>
+    <script src='js/tl3d/engine/skill/key/SkillMulTrajectory.js'></script>
+    <script src='js/tl3d/engine/skill/path/SkillPath.js'></script>
+    <script src='js/tl3d/engine/skill/path/SkillSinPath.js'></script>
+    <script src='js/tl3d/engine/skill/path/SkillMulPath.js'></script>
+    <script src='js/tl3d/engine/skill/path/PathManager.js'></script>
+    <script src='js/tl3d/engine/utils/LoadManager.js'></script>
+    <script src='js/tl3d/engine/utils/ObjDataManager.js'></script>
+    <script src='js/tl3d/engine/utils/MeshDataManager.js'></script>
+    <script src='js/tl3d/engine/utils/AnimManager.js'></script>
+    <script src='js/tl3d/engine/utils/LightProbeManager.js'></script>
+    <script src='js/tl3d/engine/utils/GroupDataManager.js'></script>
+    <script src='js/tl3d/engine/utils/KeyboardType.js'></script>
+    <script src='js/tl3d/engine/utils/KeyControl.js'></script>
+    <script src='js/tl3d/engine/utils/TimeUtil.js'></script>
+    <script src='js/tl3d/engine/utils/Util.js'></script>
+    <script src='js/tl3d/engine/utils/ColorTransition.js'></script>
+    <script src='js/tl3d/engine/utils/ArtFont.js'></script>
+    <script src='js/tl3d/engine/utils/Base64.js'></script>
+    <script src='js/tl3d/engine/utils/LabelTextFont.js'></script>
+    <script src='js/tl3d/engine/utils/BloodManager.js'></script>
+    <script src='js/tl3d/engine/utils/curves/Curve.js'></script>
+    <script src='js/tl3d/engine/utils/shadow/Shadow.js'></script>
+    <script src='js/tl3d/engine/utils/shadow/ShadowManager.js'></script>
+    <script src='js/tl3d/engine/utils/SceneResManager.js'></script>
+    <script src='js/tl3d/engine/utils/res/BaseRes.js'></script>
+    <script src='js/tl3d/engine/utils/res/RoleRes.js'></script>
+    <script src='js/tl3d/engine/utils/res/SkillRes.js'></script>
+    <script src='js/tl3d/engine/utils/res/RoleResLow.js'></script>
+    <script src='js/tl3d/engine/utils/res/ModelRes.js'></script>
+    <script src='js/tl3d/engine/utils/res/GroupRes.js'></script>
+    <script src='js/tl3d/engine/scene/SceneRes.js'></script>
+    <script src='js/tl3d/engine/scene/SceneResLow.js'></script>
+
+    <script src='js/tl3d/engine/vo/skinanim/AnimData.js'></script>
+    <script src='js/tl3d/engine/vo/skinanim/SkinMesh.js'></script>
+    <script src='js/tl3d/engine/vo/skinanim/BoneSocketData.js'></script>
+    <script src='js/tl3d/engine/vo/collistion/CollisionVo.js'></script>
+    <script src='js/tl3d/engine/vo/collistion/CapsuleVo.js'></script>
+    <script src='js/tl3d/engine/vo/LightVo.js'></script>
+    <script src='js/tl3d/engine/scene/grldLevel/LineDisplayShader.js'></script>
+    <script src='js/tl3d/engine/scene/grldLevel/LineDisplaySprite.js'></script>
+
+    <script src='js/tl3d/engine/FpsStage.js'></script>
+
+
+    <script src='js/tl3d/mvcframe/Module.js'></script>
+    <script src='js/tl3d/mvcframe/Processor.js'></script>
+    <script src='js/tl3d/mvcframe/ModuleEventManager.js'></script>
+
+    <script src='js/tl3d/UnitFunction.js'></script>
+    <script src='js/tl3d/baseprite/CharAction.js'></script>
+
+    <script src='js/tl3dinit/scene3d/override/OverrideEngine.js'></script>
+    <script src='js/tl3dinit/scene3d/override/OverrideBloodManager.js'></script>
+    <script src='js/tl3dinit/scene2d/override2d/Override2dEngine.js'></script>
+    <script src='js/tl3dinit/scene2d/CanvasPostionModel.js'></script>
+    <script src='js/tl3dinit/scene2d/GroundModel.js'></script>
+    <script src='js/scenebase/layapan/overridebase/LayaOverride2dEngine.js'></script>
+    <script src='js/scenebase/layapan/overridebase/LayaScene2dInit.js'></script>
+    <script src='js/scenebase/layapan/LayaSceneBaseChar.js'></script>
+    <script src='js/scenebase/layapan/LayaSceneChar.js'></script>
+    <script src='js/scenebase/layapan/LayaInsideSprite.js'></script>
+    <script src='js/scenebase/BaseLaya3dSprite.js'></script>
+    <script src='js/scenebase/Scene3dLaya3dSprite.js'></script>
+    <script src='js/scenebase/Game2dChar.js'></script>
+    <script src='js/scenebase/Game3dChar.js'></script>
+    <script src='js/extendscene/Base2dSceneLayer.js'></script>
+    <script src='js/extendscene/Base2dSceneLayerExt.js'></script>
+    <script src='js/extendscene/Base3dSceneLayer.js'></script>
+    <script src='js/extendscene/FightChar.js'></script>
+    <script src='js/extendscene/MainChar.js'></script>
+    <script src='js/extendscene/BloodManagerExt.js'></script>
+    <script src='js/extendscene/GameUIChar.js'></script>
+    <script src='js/extendscene/LoadeQueue.js'></script>
+    <script src='js/extendscene/BaseSceneMgr.js'></script>
+    <script src='js/game/common/DialogExt.js'></script>
+    <script src='js/ui/layaUI.max.all.js'></script>
+    $$
+    <script src='js/Platform.js'></script>
+    <script src='js/game/manager/UIMgr.js'></script>
+    <script src='js/App.js'></script>
+    <script src='js/MiniTL3dAdpter.js'></script>
+    <script src='js/Launch.js'></script>
+</body>
+</html>

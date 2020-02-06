@@ -1,0 +1,30 @@
+module game{
+/*
+* &Module
+*/
+export class &Module extends tl3d.Module {
+    constructor() {
+        super();
+    }
+    public getModuleName(): string {
+        return "&Module";
+    }
+
+    protected listProcessors(): Array<tl3d.Processor> {
+        return [new &Processor()];
+    }
+
+    /**
+     * 模块入口
+     */
+    protected onRegister():void
+    {
+
+    }
+}
+
+    export class &Event extends tl3d.BaseEvent {
+        public static EMPTY_EVENT: string = "EMPTY_EVENT";
+        public data: any;
+    }
+}
