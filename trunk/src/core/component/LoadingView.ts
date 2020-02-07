@@ -33,10 +33,10 @@ module core {
         }
         private createCircle(cx:number,cy:number,radius:number,alpha:number):Laya.Sprite {
             let spr = new Laya.Sprite();
-            spr.width = spr.height = 20;
-            spr.graphics.drawCircle(0,0,radius,"#000000","#000000",2);
-            spr.x = cx - 10;
-            spr.y = cy - 10;
+            spr.width = spr.height = 40;
+            spr.graphics.drawCircle(spr.width/2,spr.height/2,radius,"#000000","#000000",2);
+            spr.x = cx - spr.width/2;
+            spr.y = cy - spr.height/2;
             spr.alpha = alpha;
             return spr;
         }
