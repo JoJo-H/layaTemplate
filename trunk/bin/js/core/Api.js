@@ -12,8 +12,10 @@ var core;
             API.offsetY = (Laya.stage.height - API.SCENE_HEIGHT) >> 1;
         }
     }
+    // ------------ 配置 ------------
     /** 越大表示打印等级越大,打印类型越多 1表示只打印error, 2表示打印error和warn, 3表示打印debug... */
     API.logLevel = 0;
+    API.commonButtonStateNum = 3;
     // 美术设计画布像素高宽
     API.SCENE_WIDTH = 720;
     API.SCENE_HEIGHT = 1280;

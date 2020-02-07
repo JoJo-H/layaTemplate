@@ -16,6 +16,10 @@ class Launch {
         //设置舞台宽高
         Laya.stage.setScreenSize(Laya.Browser.clientWidth * Laya.Browser.pixelRatio, Laya.Browser.clientHeight * Laya.Browser.pixelRatio);
         core.API.startRun();
+        core.API.commonButtonSkin = "comp/button.png";
+        core.API.commonButtonStateNum = 3;
+        core.API.commonPanelSkin = "comp/bg.png";
+        core.API.commonPanelSizeGrid = "30,4,4,4";
         // Laya.URL.basePath = "http://localhost:3333/layabox/layaTemplate/trunk/bin/";
         Laya.ResourceVersion.type = Laya.ResourceVersion.FILENAME_VERSION;
         //激活资源版本控制

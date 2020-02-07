@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"DialogExt",
-    "selectedBox":30,
-    "selecteID":31,
+    "selectedBox":36,
+    "selecteID":38,
     "referenceLines":null,
     "props":{"width":720,"sceneColor":"#ffffff","height":1280},
     "nodeParent":-1,
@@ -275,7 +275,7 @@
                 {
                     "x":30,
                     "type":"Label",
-                    "props":{"y":103,"width":137,"text":"This is a Label","skin":"comp/label.png","name":"label","height":26,"fontSize":20},
+                    "props":{"y":103,"width":137,"text":"This is a Label","skin":"comp/label.png","name":"label","height":26,"fontSize":20,"color":"#000000"},
                     "nodeParent":36,
                     "label":"Label(label)",
                     "isDirectory":false,
