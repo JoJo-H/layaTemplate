@@ -35,11 +35,17 @@ class Launch {
     }
     private onLoadRes(data): void {
         View.uiMap = data;
-        Laya.loader.load(["res/atlas/comp.atlas","ui.json"], Handler.create(this, this.onStartGame));
+        Laya.loader.load("lang.json", Handler.create(this, this.onLoadJson));
+        // Laya.loader.load(["res/atlas/comp.atlas","ui.json"], Handler.create(this, this.onStartGame));
+    }
+    private onLoadJson(data):void {
+        console.log("---------",data);
+        let obj = JSON.parse(data);
+        console.log("---------",obj);
     }
 
     private onStartGame(): void {
-        core.registerUI(MainView,UIConst.MainView,null,null,core.UI_DEPATH_VALUE.BOTTOM,false,true,false,null,false,true)
-        core.showUI(UIConst.MainView);
+        // core.registerUI(MainView,UIConst.MainView,null,null,core.UI_DEPATH_VALUE.BOTTOM,false,true,false,null,false,true)
+        // core.showUI(UIConst.MainView);
     }
 }

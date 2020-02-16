@@ -85,7 +85,7 @@ var core;
             }
             let parmStr = "";
             if (core.is.object(this._parmData)) {
-                parmStr = this.parseParms(this._parmData);
+                parmStr = core.network.paramsToQueryString(this._parmData);
             }
             else {
                 parmStr = this._parmData;
@@ -95,14 +95,6 @@ var core;
                 url += "/?" + parmStr;
             }
             this._http.send(url, (this._method == "get") ? "" : parmStr, this._method, "text");
-        }
-        /** 解析参数 */
-        parseParms(object) {
-            let parms = "";
-            for (var key in object) {
-                parms += key + "=" + object[key] + "&";
-            }
-            return parms;
         }
         /** 响应成功 */
         completeHandler(event) {

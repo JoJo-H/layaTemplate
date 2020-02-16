@@ -23,8 +23,8 @@ if(pid == 5){
 	// 乐众平台引入脚本
 	indextemp = indextemp.replace("</body>","\r\n	<script src='https://sdk.lezhonggame.com/Scripts/h5/v2/mlh5.wap.js?v=201910301600'></script>\r\n</body>");
 }
-var changlist=["cy.sdk","bingame_sdk","md5","fundebug.2.0.0.min","vconsole.min","bingo","favicon","sha1",
-			"extconfig","extconfig_qa_debug","extconfig_local_debug","extconfig_debug","extconfig_local","extconfig_local_test","extconfig_remote",
+var changlist=["bingame_sdk","md5","fundebug.2.0.0.min","vconsole.min","bingo","favicon","sha1",
+			"extconfig","extconfig_qa_debug","extconfig_local_debug","extconfig_local_test","extconfig_local","extconfig_debug","extconfig_remote",
 			"extconfig_remotewx","extconfig_banshu","extconfig_lezhong","extconfig_ck","extconfig_remote_hgame","extconfig_pingce"];
 var rootfiles=[];
 var configfiles=[];
@@ -69,6 +69,9 @@ function resloveFile(){
 		renameFiles(rootfiles,publishPath);
 		listindex=0;
 		renameFiles(configfiles,publishPath+"/extconfig");
+		console.log("3.------------写入------------------");
+		//写html
+		fs.writeFile(publishPath+"/index.html", indextemp,(e)=>{});
 	}
 }
 
@@ -85,10 +88,13 @@ function renameFiles(files,filepath){
 			{
 				continue;
 			}
-			if($file.indexOf(file)!=-1){ //存在就重命名
+			//存在就重命名,并且排除相似文件 -- 比如寻找extconfig.js时 目录extconfig的某个文件(如extconfig_local00md5.js的MD5文件)时匹配到,indexOf!=-1,
+			// 如果未排除会将extconfig_local00md5.js重命名为extconfig.js
+			if($file.indexOf(file)!=-1 && $file[file.length] != "_"){ 
 				console.log(filepath+"/"+$file,"->",fullPath);
 				flag=true;
 				fs.renameSync(filepath+"/"+$file, fullPath);  //重命名
+				files.splice($k,1);
 				renameFiles(files,filepath); 
 				break;
 			}
@@ -96,12 +102,6 @@ function renameFiles(files,filepath){
 		if(!flag){
 			renameFiles(files,filepath); 
 		}
-	}
-	else
-	{
-		console.log("3.------------写入------------------");
-		//写html
-		fs.writeFile(publishPath+"/index.html", indextemp,(e)=>{});
 	}
 }
 

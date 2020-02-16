@@ -113,7 +113,7 @@ module core {
 			}
             let parmStr = "";
             if (is.object(this._parmData)) {
-                parmStr = this.parseParms(this._parmData)
+                parmStr = network.paramsToQueryString(this._parmData);
             } else {
                 parmStr = this._parmData;
             }
@@ -122,15 +122,6 @@ module core {
                 url += "/?" + parmStr;
             }
             this._http.send(url, (this._method == "get") ? "" : parmStr, this._method, "text");
-        }
-
-        /** 解析参数 */
-        private parseParms(object): string {
-            let parms: string = "";
-            for (var key in object) {
-                parms += key + "=" + object[key] + "&";
-            }
-            return parms;
         }
 
         /** 响应成功 */

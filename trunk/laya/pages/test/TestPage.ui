@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"DialogExt",
-    "selectedBox":36,
-    "selecteID":38,
+    "selectedBox":42,
+    "selecteID":43,
     "referenceLines":null,
     "props":{"width":720,"sceneColor":"#ffffff","height":1280},
     "nodeParent":-1,
@@ -323,6 +323,45 @@
                     "compId":41,
                     "child":[
                         ]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "props":{"y":104,"x":112,"skin":"comp/bg.png"},
+            "nodeParent":1,
+            "label":"Image",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":42,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "props":{"width":100,"height":79},
+                    "nodeParent":42,
+                    "label":"Sprite",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":43,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Circle",
+                            "props":{"y":40,"x":50,"radius":10,"lineWidth":1,"fillColor":"#ff0000"},
+                            "nodeParent":43,
+                            "label":"Circle",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":44,
+                            "child":[
+                                ]
+                        }]
                 }]
         }],
     "animations":[

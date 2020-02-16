@@ -30,11 +30,17 @@ class Launch {
     }
     onLoadRes(data) {
         View.uiMap = data;
-        Laya.loader.load(["res/atlas/comp.atlas", "ui.json"], Handler.create(this, this.onStartGame));
+        Laya.loader.load("lang.json", Handler.create(this, this.onLoadJson));
+        // Laya.loader.load(["res/atlas/comp.atlas","ui.json"], Handler.create(this, this.onStartGame));
+    }
+    onLoadJson(data) {
+        console.log("---------", data);
+        let obj = JSON.parse(data);
+        console.log("---------", obj);
     }
     onStartGame() {
-        core.registerUI(MainView, UIConst.MainView, null, null, core.UI_DEPATH_VALUE.BOTTOM, false, true, false, null, false, true);
-        core.showUI(UIConst.MainView);
+        // core.registerUI(MainView,UIConst.MainView,null,null,core.UI_DEPATH_VALUE.BOTTOM,false,true,false,null,false,true)
+        // core.showUI(UIConst.MainView);
     }
 }
 //# sourceMappingURL=Launch.js.map

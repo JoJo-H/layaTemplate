@@ -19,8 +19,6 @@ module core {
         /** 通用背景图片皮肤 */
         public static commonPanelSkin : string;
         public static commonPanelSizeGrid : string;
-        /** 请求失败时的消息处理器类名 */
-        public static requestMsgHandler : IMsgHandler;
         // 美术设计画布像素高宽
         static SCENE_WIDTH: number = 720;
         static SCENE_HEIGHT: number = 1280;
