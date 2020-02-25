@@ -24,8 +24,23 @@ module core {
         static SCENE_HEIGHT: number = 1280;
         public static offsetY : number = 0;
         public static offsetX : number = 0;
+        // 离线
+        public static unline : boolean = false;
 
+        private static _instance : API;
+        static getInstance():API{
+            if(!this._instance){
+                this._instance = new API();
+            }
+            return this._instance;
+        }
 
+        public svrMinTime : number; // 服务器时间戳(毫秒)
+        public svrTime : number;    // 服务器时间(秒)
+        setServerTime(time:number):void {
+            this.svrMinTime = time;
+            this.svrTime = time / 1000;
+        }
 
         static startRun():void {
             UIConfig.closeDialogOnSide = true;

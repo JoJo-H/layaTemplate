@@ -273,7 +273,7 @@ module core {
         UIMgr.getInstance().registerUI(ui, uiname,atlases,destroyAtlases,depth,popEffect,isModal,closeOther,parentUI,isQueue,adaptStage);
     }
     /** 显示ui */
-    export function showUI(uiname: string, dataSource?: any, sound = true, preinit: boolean = false) {
+    export function showUI(uiname: string, dataSource?: any):void {
         UIMgr.getInstance().showUI(uiname, dataSource);
     }
     /** 隐藏ui */

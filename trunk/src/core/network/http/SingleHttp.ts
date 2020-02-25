@@ -80,7 +80,8 @@ module core {
             this._maskFlag = false;
             clearTimeout(this._timeout);
             clearTimeout(this._tryTimeout);
-            network.recovery(this);
+            HttpAPI.recovery(this);
+            HttpQueueMgr.getInstance().update();
         }
 
         /**
@@ -113,7 +114,7 @@ module core {
 			}
             let parmStr = "";
             if (is.object(this._parmData)) {
-                parmStr = network.paramsToQueryString(this._parmData);
+                parmStr = NetConfig.paramsToQueryString(this._parmData);
             } else {
                 parmStr = this._parmData;
             }
@@ -164,6 +165,9 @@ module core {
 					this.send();
 				}, 1000);
 			}else {
+                if (this._requestFail) {
+                    this._requestFail(this._backArgs);
+                }
 				this.clear();
 			}
 		}

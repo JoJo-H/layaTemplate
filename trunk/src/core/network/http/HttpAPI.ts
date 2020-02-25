@@ -30,7 +30,7 @@ module core {
          * @param cb 请求回调
          * @param showMask 是否显示转圈圈遮罩
          */
-        request(route: IHttpRoute, msg: Object, cb, showMask: boolean = true): void {
+        request(route: IHttpRoute, msg: Object, cb:Function, showMask: boolean = true): void {
             msg = msg || {};
             var routeName = route.key;
             if (!routeName) return;
@@ -51,7 +51,7 @@ module core {
             }
 
             this.reqId++;
-            // logdebug("network.request：", routeName, msg, this.reqId);
+            logdebug("network.request：", routeName, msg, this.reqId);
             this.sendMessage(this.reqId, routeName, msg, showMask);
             this.callbacks[this.reqId] = cb;
             this.routeMap[this.reqId] = route;
@@ -67,7 +67,7 @@ module core {
         private sendMessage(reqId: number, routeName: string, msg: any, showMask: boolean) {
             let msgData: any = {};
             // 将所需的对象参数转换成字节数组
-            let globalParam = network._globalParams;
+            let globalParam = NetConfig._globalParams;
             for (let key in globalParam) {
                 msgData[key] = globalParam[key];
             }
@@ -77,13 +77,24 @@ module core {
             bytes = this.gameEncode(reqId, routeName, bytes);
 
             let cpacket = new Laya.Byte(bytes.length);
-            cpacket.writeArrayBuffer(msg, 0, msg.length);
-            // var packet = Package.encode(Package.TYPE_DATA, cpacket);
-            // this.send(packet, showMask);
+            cpacket.writeArrayBuffer(bytes, 0, bytes.length);
+            var packet = Package.encode(Package.TYPE_DATA, cpacket);
+            this.send(routeName,packet, showMask);
+        };
+
+        send(routeName: string, packet: Laya.Byte, showMask :boolean = false) {
+            let http: SingleHttp = HttpAPI.createHttp();
+            http.addData(NetConfig.httpUrl, packet.buffer, showMask);
+            http.addCallback(null,(response)=>{
+                network.getInstance().processPackage(response);
+            },()=>{
+                network.getInstance().processError(routeName);
+            });
+            HttpQueueMgr.getInstance().push(http);
         };
 
         /** 封包 -- 加上字节头数据 */
-        gameEncode(reqId: number, routeName: string, msg: Laya.Byte): Laya.Byte {
+        private gameEncode(reqId: number, routeName: string, msg: Laya.Byte): Laya.Byte {
             var msgLen = 0;
 
             // 用1个字节来存储reqId的字节长度
@@ -125,7 +136,7 @@ module core {
         }
 
         /** 包装reqid -- 在buffer中插入数值字节数组,从offset位置开始 */
-        public encodeNumber(id:number, buffer:Laya.Byte, offset:number):number {
+        private encodeNumber(id:number, buffer:Laya.Byte, offset:number):number {
             let valueAry = ByteUtil.numberEncodeToAry(id);
             for(let i = 0 ; i < valueAry.length ; i++){
                 buffer[offset++] = valueAry[i];
@@ -134,7 +145,7 @@ module core {
         }
 
         /** 包装route */
-        public encodeMsgRoute(routeByte:Laya.Byte, buffer:Laya.Byte, offset:number):number {
+        private encodeMsgRoute(routeByte:Laya.Byte, buffer:Laya.Byte, offset:number):number {
             if (routeByte) {
                 ByteUtil.copyArray(buffer, offset, routeByte, 0, routeByte.length);
                 offset += routeByte.length;
@@ -149,11 +160,32 @@ module core {
          * @param buffer 目标buff
          * @param offset 起始位置
          */
-        public encodeMsgBody(msg:Laya.Byte, buffer:Laya.Byte, offset:number):number {
+        private encodeMsgBody(msg:Laya.Byte, buffer:Laya.Byte, offset:number):number {
             ByteUtil.copyArray(buffer, offset, msg, 0, msg.length);
             return offset + msg.length;
         }
 
+        /** SingleHttp的标识 */
+        static _httpId : number = 0;
+        /** 对象池 */
+        static _httpPool : SingleHttp[] = [];
+        /** 创建http */
+        static createHttp():SingleHttp{
+            let http : SingleHttp;
+            if(HttpAPI._httpPool.length > 0){
+                http = HttpAPI._httpPool.shift();
+            }else{
+                http = new SingleHttp();
+                http.httpId = ++HttpAPI._httpId;
+            }
+            http.initHttp();
+            return http;
+        }
+        /** 回收http */
+        static recovery(http:SingleHttp):void {
+            http.recovery();
+            HttpAPI._httpPool.push(http);
+        }
 
     }
 }
